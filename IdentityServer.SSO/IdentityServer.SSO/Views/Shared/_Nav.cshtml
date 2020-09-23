@@ -1,0 +1,51 @@
+﻿@using IdentityServer4.Extensions
+
+@{
+    string name = null;
+    if (!true.Equals(ViewData["signed-out"]))
+    {
+        name = Context.User?.GetDisplayName();
+    }
+}
+
+<div class="nav-page">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <a href="~/" class="navbar-brand">
+            <img src="~/icon.png" class="icon-banner">
+            Portal SSO
+        </a>
+
+        <ul class="navbar-nav mr-auto">
+
+        </ul>
+
+        @if (!string.IsNullOrWhiteSpace(name))
+        {
+            <form class="form-inline">
+                <span class="navbar-text login-info">
+                    Olá @name
+                </span>
+
+                <button class="btn btn-danger btn-logout">
+                    <a asp-action="Logout"
+                       asp-controller="Account"
+                       class="logout">
+                        Logout
+                    </a>
+                </button>
+            </form>
+        }
+        else
+        {
+            <button class="btn btn-success btn-logout">
+                <a asp-action="Login"
+                   asp-controller="Account"
+                   class="logout">
+                    Login
+                </a>
+            </button>
+        }
+
+    </nav>
+</div>

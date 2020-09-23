@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
+import { JwksValidationHandler } from 'angular-oauth2-oidc-jwks';
 import { authCodeFlowConfig } from '../auth.config';
 
 @Component({
@@ -13,8 +14,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.oauthService.configure(authCodeFlowConfig);
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+    this.oauthService.setupAutomaticSilentRefresh();
+  }
+
+  login() {
     this.oauthService.initImplicitFlow();
-    this.oauthService.loadDiscoveryDocumentAndLogin();
   }
 
   logout(){
@@ -29,4 +35,7 @@ export class HomeComponent implements OnInit {
     return claims.given_name;
   }
 
+  public get isAuthenticated(): boolean {
+    return this.oauthService.sessionChecksEnabled;
+  }
 }
