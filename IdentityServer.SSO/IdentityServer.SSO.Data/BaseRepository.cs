@@ -2,7 +2,7 @@
 
 namespace IdentityServer.SSO.Data
 {
-    public class Class1
+    public class BaseRepository
     {
     }
 }

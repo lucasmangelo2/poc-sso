@@ -1,15 +1,42 @@
 ﻿
-@{
-    Layout = null;
-}
+<button class="btn btn-group-lg">
+    <a asp-action="Insert"
+        asp-controller="User">
+        Novo usuário +
+    </a>
+</button>
 
-<!DOCTYPE html>
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Test</td>
+                <td>Test</td>
+                <td>Test</td>
+                <td>
+                    <button class="btn btn-warning">
+                        <a asp-action="Update"
+                           asp-controller="User">
+                            Atualizar
+                        </a>
+                    </button>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Register</title>
-</head>
-<body>
-</body>
-</html>
+                    <button class="btn btn-danger">
+                        <a asp-action="Delete"
+                           asp-controller="User">
+                            Remover
+                        </a>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

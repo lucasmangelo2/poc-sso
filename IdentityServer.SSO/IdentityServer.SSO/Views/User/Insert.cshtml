@@ -1,34 +1,54 @@
 ﻿@model IdentityServer.SSO.Models.UserAccountModel
 
-@{
-    Layout = null;
-}
+<button class="btn btn-info">
+    <a asp-action="Index"
+       asp-controller="User">
+        Voltar
+    </a>
+</button>
 
-<!DOCTYPE html>
+<partial name="_ValidationSummary" />
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>CreateUser</title>
-</head>
-<body>
+<form asp-route="Insert">
 
-<h4>UserAccountModel</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="CreateUser">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-12">
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <label asp-for="Username">Login</label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Login"
+                       asp-for="Username">
             </div>
-        </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="Password">Senha</label>
+                <input type="text"
+                       class="form-control"
+                       asp-for="Password"
+                       placeholder="Senha">
+            </div>
+        </div>
+    </div>
 
-</body>
-</html>
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="Email">E-mail</label>
+                <input type="email"
+                       class="form-control"
+                       asp-for="Email"
+                       placeholder="E-mail">
+            </div>
+        </div>
+    </div>
+
+
+    <button class="btn btn-success">
+        Salvar
+    </button>
+</form>

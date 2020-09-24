@@ -38,7 +38,7 @@ namespace IdentityServer.SSO.Controllers
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public IActionResult Delete(int id)
         {
             return View("Indext");
         }
