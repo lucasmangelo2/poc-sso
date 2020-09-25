@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer.SSO.Infra.Atributtes;
-using IdentityServer.SSO.Models;
+using IdentityServer.SSO.ViewModel;
 using IdentityServer.SSO.Quickstart.UI;
 using IdentityServer4.Configuration;
 using IdentityServer4.Events;

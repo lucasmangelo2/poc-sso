@@ -1,11 +1,7 @@
-﻿
-
-
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace IdentityServer.SSO.Models
+namespace IdentityServer.SSO.ViewModel
 {
     public class GrantsViewModel
     {

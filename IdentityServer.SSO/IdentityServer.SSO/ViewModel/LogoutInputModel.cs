@@ -1,4 +1,4 @@
-﻿namespace IdentityServer.SSO.Models
+﻿namespace IdentityServer.SSO.ViewModel
 {
     public class LogoutInputModel
     {

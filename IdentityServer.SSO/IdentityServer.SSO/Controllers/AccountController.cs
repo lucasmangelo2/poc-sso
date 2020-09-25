@@ -1,7 +1,7 @@
 using IdentityModel;
 using IdentityServer.SSO.Infra.Atributtes;
 using IdentityServer.SSO.Infra.Helpers;
-using IdentityServer.SSO.Models;
+using IdentityServer.SSO.ViewModel;
 using IdentityServer.SSO.Quickstart.UI;
 using IdentityServer4;
 using IdentityServer4.Events;

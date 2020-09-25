@@ -1,6 +1,6 @@
 ﻿using IdentityServer.SSO.Business.Interfaces;
 using IdentityServer.SSO.Data.Interfaces;
-using IdentityServer.SSO.Models;
+using IdentityServer.SSO.Model;
 
 namespace IdentityServer.SSO.Business
 {

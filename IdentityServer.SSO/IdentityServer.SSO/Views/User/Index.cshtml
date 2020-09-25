@@ -1,42 +1,45 @@
-﻿
-<button class="btn btn-group-lg">
+﻿@using  IdentityServer.SSO.ViewModel
+@model BaseListViewModel<UserViewModel>
+
+<button class="btn btn-info">
     <a asp-action="Insert"
-        asp-controller="User">
+       asp-controller="User">
         Novo usuário +
     </a>
 </button>
 
 <div>
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Código</th>
-                <th>Nome</th>
-                <th>Email</th>
-                <th>Ações</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Ações</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Test</td>
-                <td>Test</td>
-                <td>Test</td>
-                <td>
-                    <button class="btn btn-warning">
-                        <a asp-action="Update"
-                           asp-controller="User">
-                            Atualizar
-                        </a>
-                    </button>
+            @foreach (var user in Model?.Data)
+            {
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>
+                        <button class="btn btn-warning">
+                            <a asp-action="Update"
+                               asp-controller="User">
+                                Atualizar
+                            </a>
+                        </button>
 
-                    <button class="btn btn-danger">
-                        <a asp-action="Delete"
-                           asp-controller="User">
-                            Remover
-                        </a>
-                    </button>
-                </td>
-            </tr>
+                        <button class="btn btn-danger">
+                            <a asp-action="Delete"
+                               asp-controller="User">
+                                Remover
+                            </a>
+                        </button>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

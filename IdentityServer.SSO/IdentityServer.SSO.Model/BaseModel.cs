@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IdentityServer.SSO.Models
+namespace IdentityServer.SSO.Model
 {
     public class BaseModel
     {

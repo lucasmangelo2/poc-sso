@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
-using IdentityServer.SSO.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using IdentityServer.SSO.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +12,19 @@ namespace IdentityServer.SSO.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            BaseListViewModel<UserViewModel> vm = new BaseListViewModel<UserViewModel>()
+            {
+                Data = Config.GetUsers()
+                .Select(x => new UserViewModel()
+                {
+                    Email = x.Claims.First(x => x.Type == "email")?.Value,
+                    Password = x.Password,
+                    Username = x.Username
+                })
+                .ToList()
+            };
+
+            return View(vm);
         }
 
         [HttpGet]
@@ -20,9 +34,9 @@ namespace IdentityServer.SSO.Controllers
         }
 
         [HttpPost]
-        public IActionResult Insert(UserAccountModel model)
+        public IActionResult Insert(UserViewModel model)
         {
-            return View("Indext");
+            return Index();
         }
 
         [HttpGet]
@@ -32,15 +46,15 @@ namespace IdentityServer.SSO.Controllers
         }
 
         [HttpPut]
-        public IActionResult Update(UserAccountModel model)
+        public IActionResult Update(UserViewModel model)
         {
-            return View("Indext");
+            return Index();
         }
 
         [HttpDelete]
         public IActionResult Delete(int id)
         {
-            return View("Indext");
+            return Index();
         }
     }
 }

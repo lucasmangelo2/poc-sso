@@ -1,5 +1,5 @@
 using System;
-using IdentityServer.SSO.Models;
+using IdentityServer.SSO.ViewModel;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Mvc;
 

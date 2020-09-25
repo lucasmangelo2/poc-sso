@@ -11,7 +11,7 @@ using IdentityServer4.Validation;
 using System.Collections.Generic;
 using System;
 using IdentityServer.SSO.Infra.Atributtes;
-using IdentityServer.SSO.Models;
+using IdentityServer.SSO.ViewModel;
 using IdentityServer.SSO.Infra.Helpers;
 using IdentityServer.SSO.Quickstart.UI;
 

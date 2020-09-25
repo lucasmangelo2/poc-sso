@@ -5,23 +5,23 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.SSO", "IdentityServer.SSO\IdentityServer.SSO.csproj", "{36030BF4-9871-4D6F-B5D7-EF16DECBB941}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.SSO.Models", "IdentityServer.SSO.Models\IdentityServer.SSO.Models.csproj", "{67235FC1-F3EC-4FED-8698-6E7BF81EB448}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.SSO.Model", "IdentityServer.SSO.Model\IdentityServer.SSO.Model.csproj", "{67235FC1-F3EC-4FED-8698-6E7BF81EB448}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.SSO.Business", "IdentityServer.SSO.Business\IdentityServer.SSO.Business.csproj", "{FE56F534-D09E-431A-AE80-15F81CB51C87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.SSO.Business", "IdentityServer.SSO.Business\IdentityServer.SSO.Business.csproj", "{FE56F534-D09E-431A-AE80-15F81CB51C87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.SSO.IoC", "IdentityServer.SSO.IoC\IdentityServer.SSO.IoC.csproj", "{BCF32F63-5D0F-4619-BCBE-488274429596}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.SSO.IoC", "IdentityServer.SSO.IoC\IdentityServer.SSO.IoC.csproj", "{BCF32F63-5D0F-4619-BCBE-488274429596}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossCutting", "CrossCutting", "{040D0B6B-BB1F-48A1-A042-3BB2FF05F9BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.SSO.Business.Interfaces", "IdentityServer.SSO.Business.Interfaces\IdentityServer.SSO.Business.Interfaces.csproj", "{8DC5C0F3-6132-4358-962E-6318A51F5D4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.SSO.Business.Interfaces", "IdentityServer.SSO.Business.Interfaces\IdentityServer.SSO.Business.Interfaces.csproj", "{8DC5C0F3-6132-4358-962E-6318A51F5D4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.SSO.Data", "IdentityServer.SSO.Data\IdentityServer.SSO.Data.csproj", "{9F3A416E-C471-4F79-9201-B9E0CEE24236}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.SSO.Data", "IdentityServer.SSO.Data\IdentityServer.SSO.Data.csproj", "{9F3A416E-C471-4F79-9201-B9E0CEE24236}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.SSO.Data.Interfaces", "IdentityServer.SSO.Data.Interfaces\IdentityServer.SSO.Data.Interfaces.csproj", "{E2D9163B-0174-4E5D-A0DA-DB7121AB3E7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.SSO.Data.Interfaces", "IdentityServer.SSO.Data.Interfaces\IdentityServer.SSO.Data.Interfaces.csproj", "{E2D9163B-0174-4E5D-A0DA-DB7121AB3E7A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module", "Module", "{2C9434F3-4C8D-4C58-AD84-A730127064BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.SSO.Enums", "IdentityServer.SSO.Enums\IdentityServer.SSO.Enums.csproj", "{86EC12D7-8215-4C70-92C9-F61C38D82B87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.SSO.Enums", "IdentityServer.SSO.Enums\IdentityServer.SSO.Enums.csproj", "{86EC12D7-8215-4C70-92C9-F61C38D82B87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IdentityServer.SSO.Models
+namespace IdentityServer.SSO.Model
 {
     [Table("tb_aplicacao")]
     public class Application : BaseModel

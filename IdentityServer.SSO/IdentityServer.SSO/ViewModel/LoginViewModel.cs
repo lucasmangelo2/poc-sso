@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace IdentityServer.SSO.Models
+namespace IdentityServer.SSO.ViewModel
 {
     public class LoginViewModel : LoginInputModel
     {

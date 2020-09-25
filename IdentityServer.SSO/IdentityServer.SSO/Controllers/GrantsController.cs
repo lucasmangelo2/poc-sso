@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using IdentityServer4.Events;
 using IdentityServer4.Extensions;
 using IdentityServer.SSO.Infra.Atributtes;
-using IdentityServer.SSO.Models;
+using IdentityServer.SSO.ViewModel;
 
 namespace IdentityServer.SSO.Controllers
 {

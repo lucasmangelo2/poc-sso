@@ -1,6 +1,6 @@
 using IdentityServer4.Models;
 
-namespace IdentityServer.SSO.Models
+namespace IdentityServer.SSO.ViewModel
 {
     public class ProcessConsentResult
     {

@@ -1,5 +1,5 @@
 using IdentityServer.SSO.Infra.Atributtes;
-using IdentityServer.SSO.Models;
+using IdentityServer.SSO.ViewModel;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;

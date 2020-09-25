@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer.SSO.Infra.Atributtes;
-using IdentityServer.SSO.Models;
+using IdentityServer.SSO.ViewModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

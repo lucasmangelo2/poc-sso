@@ -1,4 +1,4 @@
-﻿using IdentityServer.SSO.Models;
+﻿using IdentityServer.SSO.Model;
 using System;
 
 namespace IdentityServer.SSO.Data.Interfaces

@@ -1,4 +1,4 @@
-﻿using IdentityServer.SSO.Models;
+﻿using IdentityServer.SSO.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdentityServer.SSO.Data

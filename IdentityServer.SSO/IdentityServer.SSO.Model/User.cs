@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IdentityServer.SSO.Models
+namespace IdentityServer.SSO.Model
 {
     [Table("tb_usuario")]
     public class User : BaseModel

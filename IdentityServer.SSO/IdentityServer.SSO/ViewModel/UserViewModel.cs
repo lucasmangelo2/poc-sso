@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IdentityServer.SSO.Models
+namespace IdentityServer.SSO.ViewModel
 {
-    public class UserAccountModel
+    public class UserViewModel
     {
         [Required]
         public string Username { get; set; }

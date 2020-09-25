@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Text;
 
-namespace IdentityServer.SSO.Models
+namespace IdentityServer.SSO.ViewModel
 {
     public class DiagnosticsViewModel
     {
