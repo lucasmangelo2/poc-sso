@@ -1,4 +1,4 @@
-using IdentityServer.SSO.Data;
+using IdentityServer.SSO.Data.Context;
 using IdentityServer.SSO.Infra.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using IdentityServer.SSO.IoC;
 
 namespace IdentityServer.SSO
 {
@@ -38,6 +39,7 @@ namespace IdentityServer.SSO
             });
 
             services.AddSameSiteCookiePolicy();
+            services.RegisterServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

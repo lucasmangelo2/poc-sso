@@ -3,10 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IdentityServer.SSO.Model
 {
-    [Table("tb_permissao_aplicacao")]
     public class ApplicationClaim : BaseModel
     {
-        [Column("nome"), MaxLength(50), Required]
-        public string Name { get; set; }
+        [Column("id_aplicacao"), ForeignKey("Application"), Required]
+        public int ApplicationId { get; set; }
+
+        [Column("id_permissao"), ForeignKey("Claim"), Required]
+        public int ClaimId { get; set; }
     }
 }

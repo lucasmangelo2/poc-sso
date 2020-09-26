@@ -9,7 +9,7 @@ namespace IdentityServer.SSO.Model
         [Column("id_usuario"), ForeignKey("User"), Required]
         public int UserId { get; set; }
 
-        [Column("id_permissaoaplicacao"), ForeignKey("ApplicationClaim"), Required]
-        public int ApplicationClaimId { get; set; }
+        [Column("id_permissao"), ForeignKey("Claim"), Required]
+        public int ClaimId { get; set; }
     }
 }

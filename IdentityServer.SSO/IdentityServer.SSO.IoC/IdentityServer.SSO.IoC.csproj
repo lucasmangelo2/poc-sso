@@ -8,4 +8,11 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\IdentityServer.SSO.Business.Interfaces\IdentityServer.SSO.Business.Interfaces.csproj" />
+    <ProjectReference Include="..\IdentityServer.SSO.Business\IdentityServer.SSO.Business.csproj" />
+    <ProjectReference Include="..\IdentityServer.SSO.Data.Interfaces\IdentityServer.SSO.Data.Interfaces.csproj" />
+    <ProjectReference Include="..\IdentityServer.SSO.Data\IdentityServer.SSO.Data.csproj" />
+  </ItemGroup>
+
 </Project>
