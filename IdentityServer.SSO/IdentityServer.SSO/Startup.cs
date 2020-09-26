@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using IdentityServer.SSO.IoC;
+using System.Reflection;
 
 namespace IdentityServer.SSO
 {
@@ -23,15 +24,36 @@ namespace IdentityServer.SSO
         {
             services.AddControllersWithViews();
 
+            string connectionString = Configuration.GetConnectionString("SSOConection");
+            var migrationsAssembly = this.GetType().Assembly.GetName().Name;
+
             services.AddDbContext<MainDbContext>(options => 
-                options.UseNpgsql(Configuration.GetConnectionString("SSOConection"))
+                options.UseNpgsql(
+                    connectionString, 
+                    c => c.MigrationsAssembly(migrationsAssembly)
+                )
             );
 
             services.AddIdentityServer()
                .AddDeveloperSigningCredential()
-               .AddInMemoryIdentityResources(Config.GetIdentityResources())
-               .AddInMemoryClients(Config.GetClients())
-               .AddTestUsers(Config.GetUsers());
+               .AddTestUsers(Config.GetUsers())
+                .AddConfigurationStore(options =>
+                {
+                    options.ConfigureDbContext = builder =>
+                        builder.UseNpgsql(
+                            connectionString,
+                            c => c.MigrationsAssembly(migrationsAssembly));
+                })
+               .AddOperationalStore(options =>
+               {
+                   options.ConfigureDbContext = builder =>
+                       builder.UseNpgsql(connectionString,
+                           sql => sql.MigrationsAssembly(migrationsAssembly));
+
+                   // this enables automatic token cleanup. this is optional.
+                   options.EnableTokenCleanup = true;
+                   options.TokenCleanupInterval = 30;
+               });
 
             services.AddCors(c =>
             {

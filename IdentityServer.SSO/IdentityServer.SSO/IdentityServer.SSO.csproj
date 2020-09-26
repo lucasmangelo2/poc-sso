@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.0.0" />
     <PackageReference Include="IdentityServer4" Version="4.1.0" />
+    <PackageReference Include="IdentityServer4.EntityFramework" Version="4.1.0" />
     <PackageReference Include="LigerShark.WebOptimizer.Core" Version="3.0.279" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.1.8" />
@@ -25,6 +26,10 @@
     <ProjectReference Include="..\IdentityServer.SSO.Business.Interfaces\IdentityServer.SSO.Business.Interfaces.csproj" />
     <ProjectReference Include="..\IdentityServer.SSO.Data\IdentityServer.SSO.Data.csproj" />
     <ProjectReference Include="..\IdentityServer.SSO.IoC\IdentityServer.SSO.IoC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Infra\Context\" />
   </ItemGroup>
 
 </Project>
