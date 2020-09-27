@@ -14,7 +14,7 @@ namespace IdentityServer.SSO.Controllers
         {
             BaseListViewModel<UserViewModel> vm = new BaseListViewModel<UserViewModel>()
             {
-                Data = Config.GetUsers()
+                Data = DefaultConfigurations.GetUsers()
                 .Select(x => new UserViewModel()
                 {
                     Email = x.Claims.First(x => x.Type == "email")?.Value,

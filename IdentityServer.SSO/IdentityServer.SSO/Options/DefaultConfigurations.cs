@@ -8,7 +8,7 @@ using System.Text.Json;
 
 namespace IdentityServer.SSO
 {
-    public class Config
+    public class DefaultConfigurations
     {
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {

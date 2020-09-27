@@ -28,8 +28,4 @@
     <ProjectReference Include="..\IdentityServer.SSO.IoC\IdentityServer.SSO.IoC.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Infra\Context\" />
-  </ItemGroup>
-
 </Project>

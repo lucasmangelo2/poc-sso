@@ -7,7 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using IdentityServer.SSO.IoC;
-using System.Reflection;
+using IdentityServer4.EntityFramework.DbContexts;
+using System.Linq;
+using IdentityServer4.EntityFramework.Mappers;
+using IdentityServer.SSO.Infra.Data;
 
 namespace IdentityServer.SSO
 {
@@ -24,35 +27,21 @@ namespace IdentityServer.SSO
         {
             services.AddControllersWithViews();
 
-            string connectionString = Configuration.GetConnectionString("SSOConection");
-            var migrationsAssembly = this.GetType().Assembly.GetName().Name;
-
-            services.AddDbContext<MainDbContext>(options => 
-                options.UseNpgsql(
-                    connectionString, 
-                    c => c.MigrationsAssembly(migrationsAssembly)
-                )
-            );
+            services.AddDbContext<MainDbContext>(options => ConfigureNpgsqlDbContext(options, "SSOIdentityUser"));
 
             services.AddIdentityServer()
                .AddDeveloperSigningCredential()
-               .AddTestUsers(Config.GetUsers())
-                .AddConfigurationStore(options =>
-                {
-                    options.ConfigureDbContext = builder =>
-                        builder.UseNpgsql(
-                            connectionString,
-                            c => c.MigrationsAssembly(migrationsAssembly));
-                })
+               .AddTestUsers(DefaultConfigurations.GetUsers())
+               .AddConfigurationStore(options =>
+               {
+                   options.ConfigureDbContext = options => ConfigureNpgsqlDbContext(options, "SSOIdentityConfiguration");
+               })
                .AddOperationalStore(options =>
                {
-                   options.ConfigureDbContext = builder =>
-                       builder.UseNpgsql(connectionString,
-                           sql => sql.MigrationsAssembly(migrationsAssembly));
+                   options.ConfigureDbContext = options => ConfigureNpgsqlDbContext(options, "SSOIdentityPersistedGrant");
 
-                   // this enables automatic token cleanup. this is optional.
                    options.EnableTokenCleanup = true;
-                   options.TokenCleanupInterval = 30;
+                   options.TokenCleanupInterval = 3600;
                });
 
             services.AddCors(c =>
@@ -64,7 +53,6 @@ namespace IdentityServer.SSO
             services.RegisterServices();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -92,6 +80,20 @@ namespace IdentityServer.SSO
             {
                 endpoints.MapDefaultControllerRoute();
             });
+
+            app.InitializeDatabase();
         }
+
+        #region Utils
+
+        private DbContextOptionsBuilder ConfigureNpgsqlDbContext(DbContextOptionsBuilder options, string connectionName)
+        {
+            string connectionString = Configuration.GetConnectionString(connectionName);
+            var migrationsAssembly = this.GetType().Assembly.GetName().Name;
+
+            return options.UseNpgsql(connectionString, c => c.MigrationsAssembly(migrationsAssembly));
+        }
+
+        #endregion
     }
 }
