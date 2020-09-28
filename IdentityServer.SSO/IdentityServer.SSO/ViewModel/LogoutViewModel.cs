@@ -1,7 +1,7 @@
 namespace IdentityServer.SSO.ViewModel
 {
-    public class LogoutViewModel : LogoutInputModel
+    public class LogoutViewModel
     {
-        public bool ShowLogoutPrompt { get; set; } = true;
+        public string LogoutId { get; set; }
     }
 }

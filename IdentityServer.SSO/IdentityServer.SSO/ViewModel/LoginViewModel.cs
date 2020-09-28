@@ -1,18 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel.DataAnnotations;
 
 namespace IdentityServer.SSO.ViewModel
 {
-    public class LoginViewModel : LoginInputModel
+    public class LoginViewModel
     {
-        public bool AllowRememberLogin { get; set; } = true;
-        public bool EnableLocalLogin { get; set; } = true;
+        [Required]
+        [Display(Name = "Login")]
+        public string Username { get; set; }
 
-        public IEnumerable<ExternalProvider> ExternalProviders { get; set; } = Enumerable.Empty<ExternalProvider>();
-        public IEnumerable<ExternalProvider> VisibleExternalProviders => ExternalProviders.Where(x => !String.IsNullOrWhiteSpace(x.DisplayName));
+        [Required]
+        [Display(Name = "Senha")]
+        public string Password { get; set; }
 
-        public bool IsExternalLoginOnly => EnableLocalLogin == false && ExternalProviders?.Count() == 1;
-        public string ExternalLoginScheme => IsExternalLoginOnly ? ExternalProviders?.SingleOrDefault()?.AuthenticationScheme : null;
+        [Display(Name = "Lembra credenciais")]
+        public bool RememberLogin { get; set; }
+        public string ReturnUrl { get; set; }
     }
 }

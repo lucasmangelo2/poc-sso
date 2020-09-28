@@ -9,3 +9,8 @@ button a:hover {
     color: white;
     text-decoration: none;
 }
+
+.center-col {
+    margin: auto;
+    margin-bottom: auto;
+}

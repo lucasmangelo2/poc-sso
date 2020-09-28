@@ -1,4 +1,3 @@
-using IdentityServer.SSO.Data.Context;
 using IdentityServer.SSO.Infra.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,10 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using IdentityServer.SSO.IoC;
-using IdentityServer4.EntityFramework.DbContexts;
-using System.Linq;
-using IdentityServer4.EntityFramework.Mappers;
 using IdentityServer.SSO.Infra.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace IdentityServer.SSO
 {
@@ -27,11 +24,21 @@ namespace IdentityServer.SSO
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<MainDbContext>(options => ConfigureNpgsqlDbContext(options, "SSOIdentityUser"));
+            services.AddDbContext<ApplicationDbContext>(options => ConfigureNpgsqlDbContext(options, "SSOIdentityUser"));
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options => {
+
+                options.Password.RequiredLength = 5;
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+            })
+            .AddDefaultTokenProviders()
+            .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()
+               .AddAspNetIdentity<IdentityUser>()
                .AddDeveloperSigningCredential()
-               .AddTestUsers(DefaultConfigurations.GetUsers())
                .AddConfigurationStore(options =>
                {
                    options.ConfigureDbContext = options => ConfigureNpgsqlDbContext(options, "SSOIdentityConfiguration");

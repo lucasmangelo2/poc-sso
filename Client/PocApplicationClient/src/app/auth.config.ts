@@ -7,7 +7,7 @@ export const authCodeFlowConfig: AuthConfig = {
     clientId: 'client_application',
     dummyClientSecret: 'super-secret',
     responseType: 'code',
-    scope: 'openid profile email address',
+    scope: 'openid profile email address api',
     showDebugInformation: true,
     requireHttps: false,
     sessionChecksEnabled: true,

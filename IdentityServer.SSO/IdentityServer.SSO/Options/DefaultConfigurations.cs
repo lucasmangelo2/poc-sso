@@ -1,12 +1,10 @@
 ﻿using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Models;
-using IdentityServer4.Test;
 using System.Collections.Generic;
 using System.Security.Claims;
-using System.Text.Json;
 
-namespace IdentityServer.SSO
+namespace IdentityServer.SSO.Options
 {
     public class DefaultConfigurations
     {
@@ -18,6 +16,17 @@ namespace IdentityServer.SSO
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
                 new IdentityResources.Address(),
+            };
+        }
+
+        public static IEnumerable<ApiResource> GetApiResources()
+        {
+            return new List<ApiResource>
+            {
+                new ApiResource("api", "API para troca de informações", new []{ 
+                    "fullacess",
+                    "readonly"
+                })
             };
         }
 
@@ -47,35 +56,15 @@ namespace IdentityServer.SSO
             };
         }
 
-        public static List<TestUser> GetUsers()
+        public static List<Claim> GetPrimaryClaims()
         {
-            var address = new
+            return new List<Claim>
             {
-                street_address = "One Hacker Way",
-                locality = "Heidelberg",
-                postal_code = 69118,
-                country = "Germany"
-            };
-
-            return new List<TestUser>
-            {
-                new TestUser
-                {
-                    SubjectId = "1",
-                    Username = "lucas",
-                    Password = "12345",
-                    Claims = new List<Claim>
-                    {
-                        new Claim(JwtClaimTypes.Name, "Lucas"),
-                        new Claim(JwtClaimTypes.GivenName, "Lucas Mangelo"),
-                        new Claim(JwtClaimTypes.FamilyName, "Lucas"),
-                        new Claim(JwtClaimTypes.Email, "lucas@gmail.com"),
-                        new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
-                        new Claim(JwtClaimTypes.WebSite, "http://bob.com"),
-                        new Claim(JwtClaimTypes.Address, JsonSerializer.Serialize(address), IdentityServerConstants.ClaimValueTypes.Json),
-                        new Claim("createuser", "true")
-                    }
-                }
+                new Claim(JwtClaimTypes.Name, "Administrador"),
+                new Claim(JwtClaimTypes.GivenName, "Administrador"),
+                new Claim(JwtClaimTypes.Email, "admin-sso@gmail.com"),
+                new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
+                new Claim("createuser", "true")
             };
         }
     }

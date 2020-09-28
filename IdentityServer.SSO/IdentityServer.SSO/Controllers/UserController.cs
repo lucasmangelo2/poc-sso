@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServer.SSO.Options;
 using IdentityServer.SSO.ViewModel;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityServer.SSO.Controllers
@@ -14,12 +16,12 @@ namespace IdentityServer.SSO.Controllers
         {
             BaseListViewModel<UserViewModel> vm = new BaseListViewModel<UserViewModel>()
             {
-                Data = DefaultConfigurations.GetUsers()
+                Data = new List<IdentityUser>()
                 .Select(x => new UserViewModel()
                 {
-                    Email = x.Claims.First(x => x.Type == "email")?.Value,
-                    Password = x.Password,
-                    Username = x.Username
+                    //Email = x.Claims.First(x => x.Type == "email")?.Value,
+                    Password = x.PasswordHash,
+                    Username = x.UserName
                 })
                 .ToList()
             };
