@@ -24,7 +24,7 @@ namespace IdentityServer.SSO.Infra.Data
 
                 provider.PersistDefaultClients();
                 provider.PersistDefaultIdentityResources();
-                provider.PersistDefaultApiResources();
+                provider.PersistDefaultApiScopes();
                 provider.PersistDefaultIdentityUser();
             }
 
@@ -61,15 +61,15 @@ namespace IdentityServer.SSO.Infra.Data
             }
         }
 
-        private static void PersistDefaultApiResources(this IServiceProvider provider)
+        private static void PersistDefaultApiScopes(this IServiceProvider provider)
         {
             var context = provider.GetRequiredService<ConfigurationDbContext>();
 
-            if (!context.ApiResources.Any())
+            if (!context.ApiScopes.Any())
             {
-                foreach (var apiResource in DefaultConfigurations.GetApiResources())
+                foreach (var apiScope in DefaultConfigurations.GetApiScopes())
                 {
-                    context.ApiResources.Add(apiResource.ToEntity());
+                    context.ApiScopes.Add(apiScope.ToEntity());
                 }
                 context.SaveChanges();
             }

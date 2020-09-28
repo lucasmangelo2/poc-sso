@@ -15,18 +15,14 @@ namespace IdentityServer.SSO.Options
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
                 new IdentityResources.Email(),
-                new IdentityResources.Address(),
             };
         }
 
-        public static IEnumerable<ApiResource> GetApiResources()
+        public static IEnumerable<ApiScope> GetApiScopes()
         {
-            return new List<ApiResource>
+            return new List<ApiScope>
             {
-                new ApiResource("api", "API para troca de informações", new []{ 
-                    "fullacess",
-                    "readonly"
-                })
+                new ApiScope("api_invoice", "API de notas fiscais")
             };
         }
 
@@ -50,7 +46,7 @@ namespace IdentityServer.SSO.Options
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.Address,
-                        "api"
+                        "api_invoice"
                     }
                 }
             };
