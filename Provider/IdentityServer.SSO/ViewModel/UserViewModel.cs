@@ -4,12 +4,18 @@ namespace IdentityServer.SSO.ViewModel
 {
     public class UserViewModel
     {
-        [Required]
+        public string Id { get; set; }
+
+        [Required, Display(Name = "Login")]
         public string Username { get; set; }
-        [Required]
+
+        [Required, Display(Name = "Senha")]
         public string Password { get; set; }
 
-        [Required]
+        [Required, Display(Name = "Nome")]
+        public string Name { get; set; }
+
+        [Required, Display(Name = "E-mail")]
         public string Email { get; set; }
     }
 }

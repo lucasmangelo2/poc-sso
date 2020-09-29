@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     var claims : any= this.oauthService.getIdentityClaims();
     if (!claims) return null;
 
-    return claims.given_name;
+    return claims.name;
   }
 
   public get isAuthenticated(): boolean {

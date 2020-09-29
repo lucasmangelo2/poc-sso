@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using IdentityServer.SSO.IoC;
 using IdentityServer.SSO.Infra.Data;
 using Microsoft.AspNetCore.Identity;
+using AutoMapper;
+using IdentityServer.SSO.Infra;
 
 namespace IdentityServer.SSO
 {
@@ -58,6 +60,13 @@ namespace IdentityServer.SSO
 
             services.AddSameSiteCookiePolicy();
             services.RegisterServices();
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            services.AddSingleton(mappingConfig.CreateMapper());
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
