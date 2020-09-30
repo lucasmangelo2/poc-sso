@@ -26,14 +26,16 @@
                     <td>
                         <button class="btn btn-warning">
                             <a asp-action="Update"
-                               asp-controller="User">
+                               asp-controller="User"
+                               asp-route-id="@user.Id">
                                 Atualizar
                             </a>
                         </button>
 
                         <button class="btn btn-danger">
                             <a asp-action="Delete"
-                               asp-controller="User">
+                               asp-controller="User"
+                               asp-route-id="@user.Id">
                                 Remover
                             </a>
                         </button>

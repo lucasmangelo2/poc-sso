@@ -1,15 +1,60 @@
-﻿
-@{
-    Layout = null;
-}
+﻿@model UserViewModel
 
-<!DOCTYPE html>
+<button class="btn btn-info">
+    <a asp-action="Index"
+       asp-controller="User">
+        Voltar
+    </a>
+</button>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Update</title>
-</head>
-<body>
-</body>
-</html>
+<partial name="_ValidationSummary" />
+
+<form asp-route="Insert">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Login"
+                       asp-for="Username">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input type="text"
+                       class="form-control"
+                       placeholder="Nome"
+                       asp-for="Name">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input type="email"
+                       class="form-control"
+                       asp-for="Email"
+                       placeholder="E-mail">
+            </div>
+        </div>
+    </div>
+
+
+    <button class="btn btn-success"
+            type="submit"
+            asp-action="Update"
+            asp-controller="User"
+            >
+        Salvar
+    </button>
+</form>
