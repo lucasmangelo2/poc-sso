@@ -1,0 +1,13 @@
+<button 
+    *ngIf="!userName" 
+    (click)="login()"
+    class="btn btn-success">
+    Login
+</button>
+
+<button 
+    *ngIf="userName" 
+    (click)="logout()"
+    class="btn btn-danger">
+    Logout
+</button>

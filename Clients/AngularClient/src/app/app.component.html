@@ -1,1 +1,27 @@
-<router-outlet></router-outlet>
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="drawer.toggle()">
+        <mat-icon> menu </mat-icon>
+    </button>
+    <h1>
+        Client SSO
+    </h1>
+    <span class="nav-spacer"></span>
+    <app-authentication></app-authentication>
+</mat-toolbar>
+<mat-drawer-container [hasBackdrop]="false">
+    <mat-drawer mode="push" #drawer closed>
+        <div class="link">
+            <a routerLink="invoice-emission">
+                Emissão de nota fiscal
+            </a>
+        </div>
+        <div class="link">
+            <a routerLink="invoice-filter">
+                Consulta de notas fiscais
+            </a>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

@@ -1,0 +1,27 @@
+.nav-spacer {
+    flex: 1 1 auto;
+}
+
+mat-drawer-container{
+    height: calc(100% - 65px);
+}
+
+.link {
+    font-size: 1.3em;
+    line-height: 2.5em;
+    margin-right: 10px;
+    margin-left: 10px;
+
+    a {
+        color: black;
+
+        &:hover {
+            text-decoration: none !important;
+        }
+    }
+}
+
+
+mat-drawer-content {
+    padding: 15px;
+}
