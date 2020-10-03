@@ -1,18 +1,20 @@
 ﻿@model UserViewModel
 
-<button class="btn btn-info">
-    <a asp-action="Index"
-       asp-controller="User">
-        Voltar
-    </a>
-</button>
+<div class="toolbar-row">
+    <button class="btn btn-info">
+        <a asp-action="Index"
+           asp-controller="User">
+            Voltar
+        </a>
+    </button>
+</div>
 
 <partial name="_ValidationSummary" />
 
 <form asp-route="Insert">
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <div class="form-group">
                 <label asp-for="Username"></label>
                 <input type="text"
@@ -21,10 +23,7 @@
                        asp-for="Username">
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <div class="form-group">
                 <label asp-for="Name"></label>
                 <input type="text"
@@ -36,12 +35,21 @@
     </div>
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <div class="form-group">
                 <label asp-for="Password"></label>
-                <input type="text"
+                <input type="password"
                        class="form-control"
                        asp-for="Password"
+                       placeholder="Senha">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+                <input type="password"
+                       class="form-control"
+                       asp-for="ConfirmPassword"
                        placeholder="Senha">
             </div>
         </div>
@@ -60,7 +68,7 @@
     </div>
 
 
-    <button class="btn btn-success" 
+    <button class="btn btn-success"
             type="submit"
             asp-action="Insert"
             asp-controller="User">

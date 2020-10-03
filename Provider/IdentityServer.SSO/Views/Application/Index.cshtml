@@ -1,1 +1,56 @@
-﻿
+﻿@model BaseListViewModel<ApplicationViewModel>
+
+<div class="toolbar-row">
+    <button class="btn btn-info">
+        <a asp-action="Insert"
+           asp-controller="Application">
+            Nova aplicação +
+        </a>
+    </button>
+</div>
+
+<div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Identificador</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Tipo de autenticação</th>
+                <th scope="col">Urls de redirecionamento</th>
+                <th scope="col">Tempo da sessão</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var application in Model?.Data)
+            {
+            <tr>
+                <td>@application.ClientId</td>
+                <td>@application.ClientName</td>
+                <td>@application.AllowedGrantTypes</td>
+                <td>@application.RedirectUris</td>
+                <td>@application.AccessTokenLifetime </td>
+                <td>
+                    <div class="table-actions-buttons">
+                        <button class="btn btn-warning">
+                            <a asp-action="Update"
+                               asp-controller="Application"
+                               asp-route-id="@application.ClientId">
+                                Atualizar
+                            </a>
+                        </button>
+
+                        <button class="btn btn-danger">
+                            <a asp-action="Delete"
+                               asp-controller="Application"
+                               asp-route-id="@application.ClientId">
+                                Remover
+                            </a>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

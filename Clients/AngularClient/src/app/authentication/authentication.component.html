@@ -1,6 +1,7 @@
 <button 
     *ngIf="!userName" 
     (click)="login()"
+    mat-raised-button
     class="btn btn-success">
     Login
 </button>
@@ -8,6 +9,10 @@
 <button 
     *ngIf="userName" 
     (click)="logout()"
+    mat-raised-button
     class="btn btn-danger">
     Logout
+    <mat-icon class="icon-logout">
+        directions_run
+    </mat-icon>
 </button>

@@ -1,1 +1,97 @@
-﻿
+﻿@model ApplicationViewModel
+
+<div class="toolbar-row">
+    <button class="btn btn-info">
+        <a asp-action="Index"
+           asp-controller="Application">
+            Voltar
+        </a>
+    </button>
+</div>
+
+<partial name="_ValidationSummary" />
+
+<form asp-route="Insert">
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="ClientId"></label>
+                <input type="text"
+                       class="form-control"
+                       asp-for="ClientId"
+                       required>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="ClientName"></label>
+                <input type="text"
+                       class="form-control"
+                       asp-for="ClientName"
+                       required>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="AccessTokenLifetime"></label>
+                <input type="number"
+                       class="form-control"
+                       value="3600"
+                       asp-for="AccessTokenLifetime"
+                       required>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="AllowedGrantTypes"></label>
+                @Html.DropDownListFor(model => model.AllowedGrantTypes,
+                                      IdentityServer.SSO.SelectLists.AllowedGrantTypesList.GetItems(),
+                                      new { @class = "form-control", @required = true })
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="RedirectUris"></label>
+                <input type="text"
+                       class="form-control"
+                       asp-for="RedirectUris"
+                       required>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="PostLogoutRedirectUris"></label>
+                <input type="text"
+                       class="form-control"
+                       asp-for="PostLogoutRedirectUris"
+                       required>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+                <label asp-for="ClientSecrets"></label>
+                <input type="text"
+                       class="form-control"
+                       asp-for="ClientSecrets"
+                       required>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-success"
+            type="submit"
+            asp-action="Insert"
+            asp-controller="Application">
+        Salvar
+    </button>
+</form>

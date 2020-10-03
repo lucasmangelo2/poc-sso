@@ -33,6 +33,6 @@ export class AuthenticationService {
   }
 
   public get isAuthenticated(): boolean {
-    return this.oauthService.sessionChecksEnabled;
+    return !!this.oauthService.getAccessToken();
   }
 }

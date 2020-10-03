@@ -14,3 +14,19 @@ button a:hover {
     margin: auto;
     margin-bottom: auto;
 }
+
+.toolbar-row {
+    margin-bottom: 15px;
+}
+
+.table-actions-buttons {
+    display: flex;
+}
+
+.table-actions-buttons button {
+    margin-right: 5px;
+}
+
+.table-actions-buttons button:last-child {
+    margin-right:0px;
+}

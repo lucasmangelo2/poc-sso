@@ -51,10 +51,24 @@ namespace IdentityServer.SSO.Controllers
         }
 
         [HttpPost]
+        [Route("insert")]
         public async Task<IActionResult> Insert(UserViewModel model)
         {
-            if (!ModelState.IsValid)
+            bool loginExists = GetUserByUserName(model.Username) != null,
+                emailExists = GetUserByEmail(model.Email) != null;
+
+            if (!ModelState.IsValid || loginExists || emailExists)
             {
+                if (loginExists)
+                {
+                    ModelState.AddModelError("Username", "Login existente, por favor informe um novo login");
+                }
+
+                if (emailExists)
+                {
+                    ModelState.AddModelError("Email", "Email existente, por favor informe um novo e-mail");
+                }
+
                 return View(model);
             }
 
@@ -93,6 +107,7 @@ namespace IdentityServer.SSO.Controllers
         }
 
         [HttpPut]
+        [Route("update")]
         public async Task<IActionResult> Update(UserViewModel model)
         {
             var user = GetUserById(model.Id);
@@ -117,7 +132,7 @@ namespace IdentityServer.SSO.Controllers
             
             if (user != null)
             {
-
+                await _userManager.DeleteAsync(user);
             }
 
             return RedirectToAction("Index", "User");
@@ -155,6 +170,16 @@ namespace IdentityServer.SSO.Controllers
         private IdentityUser GetUserById(string id)
         {
             return _dbContext.Users.FirstOrDefault(x => x.Id == id);
+        }
+
+        private IdentityUser GetUserByUserName(string userName)
+        {
+            return _dbContext.Users.FirstOrDefault(x => x.UserName == userName);
+        }
+
+        private IdentityUser GetUserByEmail(string email)
+        {
+            return _dbContext.Users.FirstOrDefault(x => x.Email == email);
         }
     }
 }

@@ -1,20 +1,22 @@
 ﻿@model UserViewModel
 
-<button class="btn btn-info">
-    <a asp-action="Index"
-       asp-controller="User">
-        Voltar
-    </a>
-</button>
+<div class="toolbar-row">
+    <button class="btn btn-info">
+        <a asp-action="Index"
+            asp-controller="User">
+            Voltar
+        </a>
+    </button>
+</div>
 
 <partial name="_ValidationSummary" />
 
-<form asp-route="Insert">
+<form asp-route="Update">
 
     <input type="hidden" asp-for="Id" />
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <div class="form-group">
                 <label asp-for="Username"></label>
                 <input type="text"
@@ -23,10 +25,7 @@
                        asp-for="Username">
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <div class="form-group">
                 <label asp-for="Name"></label>
                 <input type="text"
@@ -53,8 +52,7 @@
     <button class="btn btn-success"
             type="submit"
             asp-action="Update"
-            asp-controller="User"
-            >
+            asp-controller="User">
         Salvar
     </button>
 </form>

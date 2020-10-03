@@ -8,6 +8,8 @@
         name = Context.User?.GetDisplayName();
         canCreateUSer = Context.User.Claims.FirstOrDefault(x => x.Type == "createuser") != null;
     }
+
+    string url = Context.Request.Path.ToString();
 }
 
 <div class="nav-page">
@@ -24,7 +26,15 @@
                     <a asp-action="Index"
                        asp-controller="User"
                        class="nav-link">
-                    Cadastro de Usuários
+                        Cadastro de Usuários
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a asp-action="Index"
+                       asp-controller="Application"
+                       class="nav-link">
+                        Cadastro de Aplicações
                     </a>
                 </li>
             }
@@ -46,7 +56,7 @@
                 </button>
             </form>
         }
-        else
+        else if (!url.ToLower().Contains("login"))
         {
             <button class="btn btn-success btn-logout">
                 <a asp-action="Login"

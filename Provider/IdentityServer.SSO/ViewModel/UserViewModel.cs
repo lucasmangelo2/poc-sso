@@ -12,6 +12,9 @@ namespace IdentityServer.SSO.ViewModel
         [Required, Display(Name = "Senha")]
         public string Password { get; set; }
 
+        [Required, Display(Name = "Confirmar Senha"), Compare("Password", ErrorMessage = "Por favor, verifique a senha de confirmação")]
+        public string ConfirmPassword { get; set; }
+
         [Required, Display(Name = "Nome")]
         public string Name { get; set; }
 
