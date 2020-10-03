@@ -11,15 +11,33 @@
 <mat-drawer-container [hasBackdrop]="false">
     <mat-drawer mode="push" #drawer closed>
         <div class="link">
-            <a routerLink="invoice-emission">
-                Emissão de nota fiscal
+            <a routerLink="home">
+                <mat-icon>
+                    home
+                </mat-icon>
+                Página Principal
             </a>
         </div>
-        <div class="link">
-            <a routerLink="invoice-filter">
-                Consulta de notas fiscais
-            </a>
+
+        <div *ngIf="authenticationService.isAuthenticated">
+            <div class="link">
+                <a routerLink="invoice-emission">
+                    <mat-icon>
+                        assignment
+                    </mat-icon>
+                    Emissão de nota fiscal
+                </a>
+            </div>
+            <div class="link">
+                <a routerLink="invoice-filter">
+                    <mat-icon>
+                        search
+                    </mat-icon>
+                    Consulta de notas fiscais
+                </a>
+            </div>
         </div>
+        
     </mat-drawer>
     <mat-drawer-content>
         <router-outlet></router-outlet>

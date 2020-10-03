@@ -11,9 +11,17 @@ mat-drawer-container{
     line-height: 2.5em;
     margin-right: 10px;
     margin-left: 10px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-color: #d6d6d6;
 
     a {
         color: black;
+
+        mat-icon {
+            position: relative;
+            top: 5px;
+        }
 
         &:hover {
             text-decoration: none !important;

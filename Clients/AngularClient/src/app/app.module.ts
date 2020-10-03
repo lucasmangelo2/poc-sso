@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { InvoiceModule } from './invoice/invoice.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     OAuthModule.forRoot(),
     BrowserAnimationsModule,
+    InvoiceModule,
     SharedModule
   ],
   providers: [],
