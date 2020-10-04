@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IdentityServer.SSO.ViewModel
 {
-    public class ApplicationViewModel
+    public class ClientViewModel
     {
         [Required, Display(Name = "Identificador")]
         public string ClientId { get; set; }

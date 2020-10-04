@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using AutoMapper;
 using IdentityModel;
+using IdentityServer.SSO.Business.Interfaces;
 using IdentityServer.SSO.Infra.Atributtes;
-using IdentityServer.SSO.Infra.Data;
 using IdentityServer.SSO.ViewModel;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,24 +16,17 @@ namespace IdentityServer.SSO.Controllers
     [Route("user")]
     public class UserController : Controller
     {
-        private readonly IMapper _mapper;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly ApplicationDbContext _dbContext;
+        private readonly IUserBusiness _business;
 
-        public UserController(
-            IMapper mapper,
-            ApplicationDbContext dbContext,
-            UserManager<IdentityUser> userManager)
+        public UserController(IUserBusiness business)
         {
-            _mapper = mapper;
-            _dbContext = dbContext;
-            _userManager = userManager;
+            _business = business;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var users = _dbContext.Users.ToList();
+            var users = await _business.GetAllAsync();
             BaseListViewModel<UserViewModel> vm = await GetListViewModelAsync(users);
 
             return View(vm);
@@ -54,8 +44,8 @@ namespace IdentityServer.SSO.Controllers
         [Route("insert")]
         public async Task<IActionResult> Insert(UserViewModel model)
         {
-            bool loginExists = GetUserByUserName(model.Username) != null,
-                emailExists = GetUserByEmail(model.Email) != null;
+            bool loginExists = await _business.GetUserByUserNameAsync(model.Username) != null,
+                emailExists = await _business.GetUserByEmailAsync(model.Email) != null;
 
             if (!ModelState.IsValid || loginExists || emailExists)
             {
@@ -72,20 +62,7 @@ namespace IdentityServer.SSO.Controllers
                 return View(model);
             }
 
-            var user = new IdentityUser(model.Username);
-            user.Email = model.Email;
-
-            await _userManager.CreateAsync(user);
-
-            var claims = new List<Claim>
-            {
-                new Claim(JwtClaimTypes.Name, model.Name),
-                new Claim(JwtClaimTypes.Email, user.Email)
-            };
-
-            await _userManager.AddClaimsAsync(user, claims);
-
-            await _userManager.AddPasswordAsync(user, model.Password);
+            await _business.InsertAsync(model.Username, model.Name, model.Email, model.Password);
 
             return RedirectToAction("Index", "User");
         }
@@ -94,7 +71,7 @@ namespace IdentityServer.SSO.Controllers
         [Route("update/{id}")]
         public async Task<IActionResult> Update(string id)
         {
-            var user = GetUserById(id);
+            var user = await _business.GetUserByIdAsync(id);
 
             if (user != null)
             {
@@ -110,16 +87,15 @@ namespace IdentityServer.SSO.Controllers
         [Route("update")]
         public async Task<IActionResult> Update(UserViewModel model)
         {
-            var user = GetUserById(model.Id);
+            var user = await _business.GetUserByIdAsync(model.Id);
 
             if (user != null)
             {
                 user.UserName = model.Username;
                 user.Email = model.Email;
 
-                await _userManager.UpdateAsync(user);
+                await _business.UpdateAsync(user);
             }
-
 
             return RedirectToAction("Index", "User");
         }
@@ -128,19 +104,14 @@ namespace IdentityServer.SSO.Controllers
         [Route("delete/{id}")]
         public async Task<IActionResult> Delete(string id)
         {
-            var user = GetUserById(id);
-            
-            if (user != null)
-            {
-                await _userManager.DeleteAsync(user);
-            }
+            await _business.DeleteAsync(id);
 
             return RedirectToAction("Index", "User");
         }
 
         private async Task<UserViewModel> GetUserViewModelAsync(IdentityUser user)
         {
-            var claims = await _userManager.GetClaimsAsync(user);
+            var claims = await _business.GetClaimsAsync(user);
 
             return new UserViewModel()
             {
@@ -165,21 +136,6 @@ namespace IdentityServer.SSO.Controllers
                 Data = list
             };
             return vm;
-        }
-
-        private IdentityUser GetUserById(string id)
-        {
-            return _dbContext.Users.FirstOrDefault(x => x.Id == id);
-        }
-
-        private IdentityUser GetUserByUserName(string userName)
-        {
-            return _dbContext.Users.FirstOrDefault(x => x.UserName == userName);
-        }
-
-        private IdentityUser GetUserByEmail(string email)
-        {
-            return _dbContext.Users.FirstOrDefault(x => x.Email == email);
         }
     }
 }

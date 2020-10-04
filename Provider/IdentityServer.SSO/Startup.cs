@@ -10,6 +10,7 @@ using IdentityServer.SSO.Infra.Data;
 using Microsoft.AspNetCore.Identity;
 using AutoMapper;
 using IdentityServer.SSO.Infra;
+using IdentityServer.SSO.Data.Context;
 
 namespace IdentityServer.SSO
 {

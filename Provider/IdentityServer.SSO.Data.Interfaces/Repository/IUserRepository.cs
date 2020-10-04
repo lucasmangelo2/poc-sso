@@ -1,11 +1,14 @@
-﻿using IdentityServer.SSO.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace IdentityServer.SSO.Data.Interfaces.Repository
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository : IRepository<IdentityUser>
     {
+        Task<IdentityUser> GetUserByIdAsync(string id);
+
+        Task<IdentityUser> GetUserByUserNameAsync(string userName);
+
+        Task<IdentityUser> GetUserByEmailAsync(string email);
     }
 }

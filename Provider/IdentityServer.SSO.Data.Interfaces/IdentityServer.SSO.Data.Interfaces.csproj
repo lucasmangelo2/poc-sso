@@ -6,10 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\IdentityServer.SSO.Model\IdentityServer.SSO.Model.csproj" />
+    <PackageReference Include="IdentityServer4.EntityFramework" Version="4.1.0" />
   </ItemGroup>
 
 </Project>

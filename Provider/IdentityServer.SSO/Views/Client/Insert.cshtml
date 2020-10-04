@@ -1,9 +1,9 @@
-﻿@model ApplicationViewModel
+﻿@model ClientViewModel
 
 <div class="toolbar-row">
     <button class="btn btn-info">
         <a asp-action="Index"
-           asp-controller="Application">
+           asp-controller="Client">
             Voltar
         </a>
     </button>
@@ -11,7 +11,7 @@
 
 <partial name="_ValidationSummary" />
 
-<form asp-route="Update">
+<form asp-route="Insert">
 
     <div class="row">
         <div class="col-6">
@@ -90,8 +90,8 @@
 
     <button class="btn btn-success"
             type="submit"
-            asp-action="Update"
-            asp-controller="Application">
+            asp-action="Insert"
+            asp-controller="Client">
         Salvar
     </button>
 </form>

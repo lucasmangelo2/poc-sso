@@ -17,15 +17,15 @@ namespace IdentityServer.SSO.Controllers
 {
 
     [Authorize]
-    [Route("application")]
+    [Route("client")]
     [SecurityHeaders]
-    public class ApplicationController : Controller
+    public class ClientController : Controller
     {
         private readonly IMapper _mapper;
         private readonly IClientStore _clientStore;
         private readonly ConfigurationDbContext _dbContext;
 
-        public ApplicationController(
+        public ClientController(
             IMapper mapper,
             IClientStore clientStore,
             ConfigurationDbContext dbContext)
@@ -49,9 +49,9 @@ namespace IdentityServer.SSO.Controllers
                 auxList.Add(client);
             }
 
-            BaseListViewModel<ApplicationViewModel> vm = new BaseListViewModel<ApplicationViewModel>()
+            BaseListViewModel<ClientViewModel> vm = new BaseListViewModel<ClientViewModel>()
             {
-                Data = _mapper.Map<List<ApplicationViewModel>>(auxList)
+                Data = _mapper.Map<List<ClientViewModel>>(auxList)
             };
 
             return View(vm);
@@ -66,7 +66,7 @@ namespace IdentityServer.SSO.Controllers
 
         [HttpPost]
         [Route("insert")]
-        public async Task<IActionResult> Insert(ApplicationViewModel model)
+        public async Task<IActionResult> Insert(ClientViewModel model)
         {
             bool clientExists = await _clientStore.FindClientByIdAsync(model.ClientId) != null;
 
@@ -93,7 +93,7 @@ namespace IdentityServer.SSO.Controllers
 
             _dbContext.SaveChanges();
 
-            return RedirectToAction("Index", "Application");
+            return RedirectToAction("Index", "Client");
         }
 
         [HttpGet]
@@ -104,17 +104,17 @@ namespace IdentityServer.SSO.Controllers
 
             if (application != null)
             {
-                var viewModel = _mapper.Map<ApplicationViewModel>(application);
+                var viewModel = _mapper.Map<ClientViewModel>(application);
 
                 return View(viewModel);
             }
 
-            return RedirectToAction("Index", "Application");
+            return RedirectToAction("Index", "Client");
         }
 
         [HttpPost]
         [Route("update/{id}")]
-        public async Task<IActionResult> Update(string id, ApplicationViewModel model)
+        public async Task<IActionResult> Update(string id, ClientViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -132,7 +132,7 @@ namespace IdentityServer.SSO.Controllers
                 _dbContext.SaveChanges();
             }
 
-            return RedirectToAction("Index", "Application");
+            return RedirectToAction("Index", "Client");
         }
 
         [HttpGet]
@@ -149,7 +149,7 @@ namespace IdentityServer.SSO.Controllers
                 _dbContext.SaveChanges();
             }
 
-            return RedirectToAction("Index", "Application");
+            return RedirectToAction("Index", "Client");
         }
     }
 }

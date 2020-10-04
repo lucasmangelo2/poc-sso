@@ -1,6 +1,4 @@
-﻿using IdentityServer.SSO.Data.Interfaces.Context;
-using IdentityServer.SSO.Data.Interfaces.Repository;
-using IdentityServer.SSO.Model;
+﻿using IdentityServer.SSO.Data.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -9,8 +7,8 @@ using System.Threading.Tasks;
 namespace IdentityServer.SSO.Data.Repository
 {
     public class BaseRepository<TModel, TContext> : IRepository<TModel>
-        where TModel : BaseModel
-        where TContext : IDbContext
+        where TModel : class
+        where TContext : DbContext
     {
         public readonly TContext Context;
 
@@ -29,14 +27,6 @@ namespace IdentityServer.SSO.Data.Repository
             return Task.Run(() =>
             {
                 return Context.Set<TModel>().AsNoTracking();
-            });
-        }
-
-        public Task<TModel> GetByIdAsync(int id)
-        {
-            return Task.Run(() =>
-            {
-                return Context.Set<TModel>().AsNoTracking().FirstOrDefault(x => x.Id == id);
             });
         }
 
@@ -67,10 +57,10 @@ namespace IdentityServer.SSO.Data.Repository
 
         private void DetachLocal(TModel model)
         {
-            TModel local = Context.Set<TModel>().Local.FirstOrDefault(x => x.Id == model.Id);
+            //TModel local = Context.Set<TModel>().Local.FirstOrDefault(x => x.Id.Equals(model.Id));
 
-            if (local != null)
-                DetachEntity(local);
+            //if (local != null)
+            //    DetachEntity(local);
         }
 
         public void DetachEntity(TModel model)

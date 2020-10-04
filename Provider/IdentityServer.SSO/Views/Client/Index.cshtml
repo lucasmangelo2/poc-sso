@@ -1,9 +1,9 @@
-﻿@model BaseListViewModel<ApplicationViewModel>
+﻿@model BaseListViewModel<ClientViewModel>
 
 <div class="toolbar-row">
     <button class="btn btn-info">
         <a asp-action="Insert"
-           asp-controller="Application">
+           asp-controller="Client">
             Nova aplicação +
         </a>
     </button>
@@ -22,28 +22,28 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var application in Model?.Data)
+            @foreach (var client in Model?.Data)
             {
             <tr>
-                <td>@application.ClientId</td>
-                <td>@application.ClientName</td>
-                <td>@application.AllowedGrantTypes</td>
-                <td>@application.RedirectUris</td>
-                <td>@application.AccessTokenLifetime </td>
+                <td>@client.ClientId</td>
+                <td>@client.ClientName</td>
+                <td>@client.AllowedGrantTypes</td>
+                <td>@client.RedirectUris</td>
+                <td>@client.AccessTokenLifetime </td>
                 <td>
                     <div class="table-actions-buttons">
                         <button class="btn btn-warning">
                             <a asp-action="Update"
-                               asp-controller="Application"
-                               asp-route-id="@application.ClientId">
+                               asp-controller="Client"
+                               asp-route-id="@client.ClientId">
                                 Atualizar
                             </a>
                         </button>
 
                         <button class="btn btn-danger">
                             <a asp-action="Delete"
-                               asp-controller="Application"
-                               asp-route-id="@application.ClientId">
+                               asp-controller="Client"
+                               asp-route-id="@client.ClientId">
                                 Remover
                             </a>
                         </button>

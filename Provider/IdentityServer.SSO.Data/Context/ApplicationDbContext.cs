@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace IdentityServer.SSO.Infra.Data
+namespace IdentityServer.SSO.Data.Context
 {
     public class ApplicationDbContext : IdentityDbContext
     {

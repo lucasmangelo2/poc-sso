@@ -15,33 +15,7 @@ namespace IdentityServer.SSO.Infra
         {
             CreateMap<IdentityUser, UserViewModel>().ReverseMap();
 
-            //CreateMap<IdentityServer4.Models.Client, IdentityServer4.EntityFramework.Entities.Client>()
-            //    .ForMember(src => src.AllowedScopes,
-            //        dst => dst.MapFrom(x => x.AllowedScopes
-            //                                .Select(y => new IdentityServer4.EntityFramework.Entities.ClientScope() { Scope = y }).ToList())
-            //    )
-            //    .ForMember(src => src.Properties,
-            //        dst => dst.MapFrom(x => x.Properties
-            //                                .Select(y => new IdentityServer4.EntityFramework.Entities.ClientProperty() { Value = y.Value, Key = y.Key }).ToList())
-            //    )
-            //    .ForMember(src => src.AllowedGrantTypes,
-            //        dst => dst.MapFrom(x => x.AllowedGrantTypes
-            //                                .Select(y => new IdentityServer4.EntityFramework.Entities.ClientGrantType() { GrantType = y }).ToList())
-            //    )
-            //    .ForMember(src => src.RedirectUris,
-            //        dst => dst.MapFrom(x => x.RedirectUris
-            //                                .Select(y => new IdentityServer4.EntityFramework.Entities.ClientRedirectUri() { RedirectUri = y }).ToList())
-            //    )
-            //    .ForMember(src => src.PostLogoutRedirectUris,
-            //        dst => dst.MapFrom(x => x.PostLogoutRedirectUris
-            //                                .Select(y => new IdentityServer4.EntityFramework.Entities.ClientPostLogoutRedirectUri() { PostLogoutRedirectUri = y }).ToList())
-            //    )
-            //    .ForMember(src => src.AllowedCorsOrigins,
-            //        dst => dst.MapFrom(x => x.AllowedCorsOrigins
-            //                                .Select(y => new IdentityServer4.EntityFramework.Entities.ClientCorsOrigin() { Origin = y }).ToList())
-            //    );
-
-            CreateMap<ApplicationViewModel, IdentityServer4.Models.Client>()
+            CreateMap<ClientViewModel, IdentityServer4.Models.Client>()
                 .ForMember(src => src.RedirectUris,
                             dst => dst.MapFrom(x => x.RedirectUris.Split(',', StringSplitOptions.None))
                 )
@@ -58,7 +32,7 @@ namespace IdentityServer.SSO.Infra
                                                     .ToList())
             );
 
-            CreateMap<IdentityServer4.Models.Client, ApplicationViewModel>()
+            CreateMap<IdentityServer4.Models.Client, ClientViewModel>()
                 .ForMember(src => src.AllowedGrantTypes, dst => dst.MapFrom(x => x.AllowedGrantTypes.JoinListToString(",")))
                 .ForMember(src => src.RedirectUris, dst => dst.MapFrom(x => x.RedirectUris.JoinListToString(",")))
                 .ForMember(src => src.PostLogoutRedirectUris, dst => dst.MapFrom(x => x.PostLogoutRedirectUris.JoinListToString(",")))
