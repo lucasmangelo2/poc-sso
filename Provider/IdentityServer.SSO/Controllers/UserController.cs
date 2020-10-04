@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IdentityModel;
 using IdentityServer.SSO.Business.Interfaces;
+using IdentityServer.SSO.Business.Interfaces.Utils;
 using IdentityServer.SSO.Infra.Atributtes;
 using IdentityServer.SSO.ViewModel;
 using Microsoft.AspNetCore.Authorization;
@@ -32,7 +33,7 @@ namespace IdentityServer.SSO.Controllers
             return View(vm);
         }
 
-       
+
         [HttpGet]
         [Route("insert")]
         public IActionResult Insert()
@@ -44,25 +45,20 @@ namespace IdentityServer.SSO.Controllers
         [Route("insert")]
         public async Task<IActionResult> Insert(UserViewModel model)
         {
-            bool loginExists = await _business.GetUserByUserNameAsync(model.Username) != null,
-                emailExists = await _business.GetUserByEmailAsync(model.Email) != null;
-
-            if (!ModelState.IsValid || loginExists || emailExists)
+            if (!ModelState.IsValid)
             {
-                if (loginExists)
-                {
-                    ModelState.AddModelError("Username", "Login existente, por favor informe um novo login");
-                }
-
-                if (emailExists)
-                {
-                    ModelState.AddModelError("Email", "Email existente, por favor informe um novo e-mail");
-                }
-
                 return View(model);
             }
 
-            await _business.InsertAsync(model.Username, model.Name, model.Email, model.Password);
+            try
+            {
+                await _business.InsertAsync(model.Username, model.Name, model.Email, model.Password);
+            }
+            catch (BusinessValidationException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(model);
+            }
 
             return RedirectToAction("Index", "User");
         }
@@ -83,18 +79,26 @@ namespace IdentityServer.SSO.Controllers
             return RedirectToAction("Index", "User");
         }
 
-        [HttpPut]
-        [Route("update")]
-        public async Task<IActionResult> Update(UserViewModel model)
+        [HttpPost]
+        [Route("update/{id}")]
+        public async Task<IActionResult> Update(string id, UserViewModel model)
         {
-            var user = await _business.GetUserByIdAsync(model.Id);
+            var user = await _business.GetUserByIdAsync(id);
 
             if (user != null)
             {
                 user.UserName = model.Username;
                 user.Email = model.Email;
 
-                await _business.UpdateAsync(user);
+                try
+                {
+                    await _business.UpdateAsync(user, model.Name);
+                }
+                catch (BusinessValidationException ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                    return View(model);
+                }
             }
 
             return RedirectToAction("Index", "User");

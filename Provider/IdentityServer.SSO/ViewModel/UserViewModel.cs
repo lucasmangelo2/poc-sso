@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace IdentityServer.SSO.ViewModel
 {
@@ -20,5 +21,7 @@ namespace IdentityServer.SSO.ViewModel
 
         [Required, Display(Name = "E-mail")]
         public string Email { get; set; }
+
+        public List<ClaimViewModel> Claims { get; set; } = new List<ClaimViewModel>();
     }
 }

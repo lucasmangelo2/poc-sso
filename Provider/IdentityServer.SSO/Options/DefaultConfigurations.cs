@@ -45,7 +45,6 @@ namespace IdentityServer.SSO.Options
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.Email,
-                        IdentityServerConstants.StandardScopes.Address,
                         "api_invoice"
                     }
                 }

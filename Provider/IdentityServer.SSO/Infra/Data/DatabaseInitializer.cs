@@ -27,6 +27,7 @@ namespace IdentityServer.SSO.Infra.Data
                 provider.PersistDefaultIdentityResources();
                 provider.PersistDefaultApiScopes();
                 provider.PersistDefaultIdentityUser();
+                provider.PersistDefaultRoles();
             }
 
             return app;
@@ -87,6 +88,22 @@ namespace IdentityServer.SSO.Infra.Data
                 userManger.CreateAsync(user).GetAwaiter().GetResult();
                 userManger.AddClaimsAsync(user, DefaultConfigurations.GetPrimaryClaims()).GetAwaiter().GetResult();
                 userManger.AddPasswordAsync(user, "password").GetAwaiter().GetResult();
+            }
+        }
+
+        private static void PersistDefaultRoles(this IServiceProvider provider)
+        {
+            var context = provider.GetRequiredService<ApplicationDbContext>();
+            var roleManger = provider.GetRequiredService<RoleManager<IdentityRole>>();
+
+            string[] rolesNames = { "Admin", "Guest", "Operator" };
+
+            if (!context.Roles.Any())
+            {
+                foreach (var role in rolesNames)
+                {
+                    roleManger.CreateAsync(new IdentityRole(role)).GetAwaiter().GetResult();
+                }
             }
         }
 

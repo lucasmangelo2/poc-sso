@@ -4,8 +4,8 @@ using IdentityServer.SSO.Infra.Extensions;
 using IdentityServer.SSO.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 
 namespace IdentityServer.SSO.Infra
 {
@@ -37,6 +37,8 @@ namespace IdentityServer.SSO.Infra
                 .ForMember(src => src.RedirectUris, dst => dst.MapFrom(x => x.RedirectUris.JoinListToString(",")))
                 .ForMember(src => src.PostLogoutRedirectUris, dst => dst.MapFrom(x => x.PostLogoutRedirectUris.JoinListToString(",")))
                 .ForMember(src => src.ClientSecrets, dst => dst.MapFrom(x => x.ClientSecrets.Select(x => x.Description).ToList().JoinListToString(",")));
+
+            CreateMap<ClaimViewModel, Claim>().ReverseMap();
         }
     }
 }

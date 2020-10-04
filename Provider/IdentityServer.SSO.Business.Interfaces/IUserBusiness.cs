@@ -9,6 +9,8 @@ namespace IdentityServer.SSO.Business.Interfaces
     {
         Task<IdentityUser> InsertAsync(string username, string name, string email, string password);
 
+        Task<IdentityUser> UpdateAsync(IdentityUser model, string name);
+
         Task DeleteAsync(string id);
 
         Task<List<Claim>> GetClaimsAsync(IdentityUser user);
