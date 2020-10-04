@@ -14,6 +14,7 @@ namespace IdentityServer.SSO.IoC
 
             services.AddScoped<IClientBusiness, ClientBusiness>();
             services.AddScoped<IUserBusiness, UserBusiness>();
+            services.AddScoped<IRoleBusiness, RoleBusiness>();
 
             #endregion
 

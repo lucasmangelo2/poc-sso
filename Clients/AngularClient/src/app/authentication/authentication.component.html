@@ -2,17 +2,15 @@
     *ngIf="!userName" 
     (click)="login()"
     mat-raised-button
-    class="btn btn-success">
+    class="btn btn-login">
     Login
 </button>
 
-<button 
-    *ngIf="userName" 
-    (click)="logout()"
-    mat-raised-button
-    class="btn btn-danger">
-    Logout
-    <mat-icon class="icon-logout">
-        directions_run
-    </mat-icon>
-</button>
+<div *ngIf="userName">
+    <button class="user-info" mat-button [matMenuTriggerFor]="menu">
+       {{userName}}
+    </button>
+    <mat-menu #menu="matMenu" xPosition="before">
+        <button mat-menu-item (click)="logout()">Log out</button>
+    </mat-menu>
+</div>

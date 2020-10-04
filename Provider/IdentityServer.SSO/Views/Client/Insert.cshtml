@@ -1,12 +1,11 @@
 ﻿@model ClientViewModel
 
 <div class="toolbar-row">
-    <button class="btn btn-info">
-        <a asp-action="Index"
-           asp-controller="Client">
-            Voltar
-        </a>
-    </button>
+    <a class="btn btn-secondary"
+        asp-action="Index"
+        asp-controller="Client">
+        Voltar
+    </a>
 </div>
 
 <partial name="_ValidationSummary" />
@@ -88,10 +87,10 @@
         </div>
     </div>
 
-    <button class="btn btn-success"
+    <a class="btn btn-success"
             type="submit"
             asp-action="Insert"
             asp-controller="Client">
         Salvar
-    </button>
+    </a>
 </form>

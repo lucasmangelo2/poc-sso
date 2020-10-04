@@ -58,8 +58,7 @@ namespace IdentityServer.SSO.Options
                 new Claim(JwtClaimTypes.Name, "Administrador"),
                 new Claim(JwtClaimTypes.GivenName, "Administrador"),
                 new Claim(JwtClaimTypes.Email, "admin-sso@gmail.com"),
-                new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean),
-                new Claim("createuser", "true")
+                new Claim(JwtClaimTypes.EmailVerified, "true", ClaimValueTypes.Boolean)
             };
         }
     }

@@ -11,6 +11,7 @@ namespace IdentityServer.SSO.SelectLists
         {
             return new List<SelectListItem>
             {
+                new SelectListItem { Text = string.Empty, Value = string.Empty},
                 new SelectListItem { Text = "Code", Value = GrantTypes.Code.JoinListToString()},
                 new SelectListItem { Text = "Code And Client Credentials", Value = GrantTypes.CodeAndClientCredentials.JoinListToString()},
                 new SelectListItem { Text = "Implicit And Client Hybrid", Value = GrantTypes.Hybrid.JoinListToString()},

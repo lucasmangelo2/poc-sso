@@ -1,12 +1,12 @@
 .body-container{margin-top:60px;padding-bottom:40px;}.welcome-page li{list-style:none;padding:4px;}.logged-out-page iframe{display:none;width:0;height:0;}.grants-page .card{margin-top:20px;border-bottom:1px solid lightgray;}.grants-page .card .card-title{font-size:120%;font-weight:bold;}.grants-page .card .card-title img{width:100px;height:100px;}.grants-page .card label{font-weight:bold;}.login-info{color:rgba(255, 255, 255, 0.5);margin-right:15px;}.logout{color:white;}
 
 
-button a {
-    color: white;
+.btn {
+    color: white !important;
 }
 
-button a:hover {
-    color: white;
+.btn:hover {
+    color: white !important;
     text-decoration: none;
 }
 
@@ -23,10 +23,15 @@ button a:hover {
     display: flex;
 }
 
-.table-actions-buttons button {
+.table-actions-buttons .btn{
     margin-right: 5px;
 }
 
-.table-actions-buttons button:last-child {
-    margin-right:0px;
+.table-actions-buttons .btn:last-child {
+    margin-right: 0px;
+}
+
+.alert-img {
+    margin-bottom: 15px;
+    width: 150px;
 }

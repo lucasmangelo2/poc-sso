@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace IdentityServer.SSO.Controllers
 {
 
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [Route("client")]
     [SecurityHeaders]
     public class ClientController : Controller

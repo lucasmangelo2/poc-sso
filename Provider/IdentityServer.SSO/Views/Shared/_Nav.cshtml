@@ -2,11 +2,11 @@
 
 @{
     string name = null;
-    bool canCreateUSer = false;
+    bool isAdmin = false;
     if (!true.Equals(ViewData["signed-out"]))
     {
         name = Context.User?.GetDisplayName();
-        canCreateUSer = Context.User.Claims.FirstOrDefault(x => x.Type == "createuser") != null;
+        isAdmin = Context.User.IsInRole("Admin");
     }
 
     string url = Context.Request.Path.ToString();
@@ -20,7 +20,7 @@
         </a>
 
         <ul class="navbar-nav mr-auto">
-            @if (canCreateUSer)
+            @if (isAdmin)
             {
                 <li class="nav-item">
                     <a asp-action="Index"
@@ -42,29 +42,23 @@
 
         @if (!string.IsNullOrWhiteSpace(name))
         {
-            <form class="form-inline">
-                <span class="navbar-text login-info">
-                    Olá @name
-                </span>
+            <span class="navbar-text login-info">
+                Olá @name
+            </span>
 
-                <button class="btn btn-danger btn-logout">
-                    <a asp-action="Logout"
-                       asp-controller="Account"
-                       class="logout">
-                        Logout
-                    </a>
-                </button>
-            </form>
+            <a class="btn btn-danger btn-logout"
+                asp-action="Logout"
+                asp-controller="Account">
+                Logout
+            </a>
         }
         else if (!url.ToLower().Contains("login"))
         {
-            <button class="btn btn-success btn-logout">
-                <a asp-action="Login"
-                   asp-controller="Account"
-                   class="logout">
-                    Login
-                </a>
-            </button>
+            <a class="btn btn-success btn-logout"
+                asp-action="Login"
+                asp-controller="Account">
+                Login
+            </a>
         }
 
     </nav>

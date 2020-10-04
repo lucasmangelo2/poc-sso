@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityModel;
 using IdentityServer.SSO.Business.Interfaces;
@@ -12,16 +13,19 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityServer.SSO.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     [SecurityHeaders]
     [Route("user")]
     public class UserController : Controller
     {
         private readonly IUserBusiness _business;
+        private readonly IRoleBusiness _roleBusiness;
 
-        public UserController(IUserBusiness business)
+        public UserController(IUserBusiness business,
+            IRoleBusiness roleBusiness)
         {
             _business = business;
+            _roleBusiness = roleBusiness;
         }
 
         [HttpGet]
@@ -52,7 +56,7 @@ namespace IdentityServer.SSO.Controllers
 
             try
             {
-                await _business.InsertAsync(model.Username, model.Name, model.Email, model.Password);
+                await _business.InsertAsync(model.Username, model.Name, model.Email, model.Password, model.Role);
             }
             catch (BusinessValidationException ex)
             {
@@ -92,7 +96,7 @@ namespace IdentityServer.SSO.Controllers
 
                 try
                 {
-                    await _business.UpdateAsync(user, model.Name);
+                    await _business.UpdateAsync(user, model.Name, model.Role);
                 }
                 catch (BusinessValidationException ex)
                 {
@@ -115,14 +119,16 @@ namespace IdentityServer.SSO.Controllers
 
         private async Task<UserViewModel> GetUserViewModelAsync(IdentityUser user)
         {
-            var claims = await _business.GetClaimsAsync(user);
+            List<Claim> claims = await _business.GetClaimsAsync(user);
+            string role = await _roleBusiness.GetRoleByUserAsync(user);
 
             return new UserViewModel()
             {
                 Id = user.Id,
                 Email = user.Email,
                 Name = claims.FirstOrDefault(x => x.Type == JwtClaimTypes.Name)?.Value,
-                Username = user.UserName
+                Username = user.UserName,
+                Role = role
             };
         }
 

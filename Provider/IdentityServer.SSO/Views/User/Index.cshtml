@@ -3,15 +3,16 @@
 
 @{
     string currentUserId = Context.User.GetSubjectId();
+    var roles = IdentityServer.SSO.SelectLists.RolesList.GetItems();
 }
 
 <div class="toolbar-row">
-    <button class="btn btn-info">
-        <a asp-action="Insert"
-           asp-controller="User">
-            Nova Aplicação +
-        </a>
-    </button>
+
+    <a class="btn btn-info"
+        asp-action="Insert"
+        asp-controller="User">
+        Novo usuário +
+    </a>
 </div>
 
 <div>
@@ -21,6 +22,7 @@
                 <th scope="col">Login</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Email</th>
+                <th scope="col">Perfil de usuário</th>
                 <th scope="col">Ações</th>
             </tr>
         </thead>
@@ -31,25 +33,24 @@
                     <td>@user.Username</td>
                     <td>@user.Name</td>
                     <td>@user.Email</td>
+                    <td>@roles.FirstOrDefault(x => x.Value == @user.Role)?.Text</td>
                     <td>
                         <div class="table-actions-buttons">
-                            <button class="btn btn-warning">
-                                <a asp-action="Update"
-                                   asp-controller="User"
-                                   asp-route-id="@user.Id">
-                                    Atualizar
-                                </a>
-                            </button>
+                            <a class="btn btn-warning"
+                                    asp-action="Update"
+                                    asp-controller="User"
+                                    asp-route-id="@user.Id">
+                                Atualizar
+                            </a>
 
                             @if (user.Id != currentUserId)
                             {
-                                <button class="btn btn-danger">
-                                    <a asp-action="Delete"
-                                       asp-controller="User"
-                                       asp-route-id="@user.Id">
-                                        Remover
-                                    </a>
-                                </button>
+                                <a class="btn btn-danger"
+                                    asp-action="Delete"
+                                    asp-controller="User"
+                                    asp-route-id="@user.Id">
+                                    Remover
+                                </a>
                             }
                         </div>
                     </td>

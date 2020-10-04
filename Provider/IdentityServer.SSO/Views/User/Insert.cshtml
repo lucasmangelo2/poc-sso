@@ -1,12 +1,11 @@
 ﻿@model UserViewModel
 
 <div class="toolbar-row">
-    <button class="btn btn-info">
-        <a asp-action="Index"
-           asp-controller="User">
-            Voltar
-        </a>
-    </button>
+    <a class="btn btn-secondary"
+        asp-action="Index"
+        asp-controller="User">
+        Voltar
+    </a>
 </div>
 
 <partial name="_ValidationSummary" />
@@ -19,7 +18,7 @@
                 <label asp-for="Username"></label>
                 <input type="text"
                        class="form-control"
-                       placeholder="Login"
+                       autocomplete="off"
                        asp-for="Username">
             </div>
         </div>
@@ -28,7 +27,6 @@
                 <label asp-for="Name"></label>
                 <input type="text"
                        class="form-control"
-                       placeholder="Nome"
                        asp-for="Name">
             </div>
         </div>
@@ -41,7 +39,7 @@
                 <input type="password"
                        class="form-control"
                        asp-for="Password"
-                       placeholder="Senha">
+                       autocomplete="off">
             </div>
         </div>
         <div class="col-6">
@@ -50,19 +48,26 @@
                 <input type="password"
                        class="form-control"
                        asp-for="ConfirmPassword"
-                       placeholder="Senha">
+                       autocomplete="off">
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-6">
             <div class="form-group">
                 <label asp-for="Email"></label>
                 <input type="email"
                        class="form-control"
-                       asp-for="Email"
-                       placeholder="E-mail">
+                       asp-for="Email">
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <label asp-for="Role"></label>
+                @Html.DropDownListFor(model => model.Role,
+                                      IdentityServer.SSO.SelectLists.RolesList.GetItems(),
+                                      new { @class = "form-control", @required = true })
             </div>
         </div>
     </div>

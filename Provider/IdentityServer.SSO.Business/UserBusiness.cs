@@ -13,16 +13,19 @@ namespace IdentityServer.SSO.Business
 {
     public class UserBusiness : BaseBusiness<IUserRepository, IdentityUser>, IUserBusiness
     {
+        private readonly IRoleBusiness _roleBusiness;
         private readonly UserManager<IdentityUser> _userManager;
 
         public UserBusiness(
+            IRoleBusiness roleBusiness,
             IUserRepository repository,
             UserManager<IdentityUser> userManager) : base(repository)
         {
+            _roleBusiness = roleBusiness;
             _userManager = userManager;
         }
 
-        public async Task<IdentityUser> InsertAsync(string username, string name, string email, string password)
+        public async Task<IdentityUser> InsertAsync(string username, string name, string email, string password, string role)
         {
             await ValidBeforeInsertAsync(username, email);
 
@@ -36,12 +39,13 @@ namespace IdentityServer.SSO.Business
             await SaveClaimAsync(user, JwtClaimTypes.Name, name);
             await SaveClaimAsync(user, JwtClaimTypes.Email, user.Email);
 
+            await _roleBusiness.InsertAsync(user, role);
             await _userManager.AddPasswordAsync(user, password);
 
             return user;
         }
 
-        public async Task<IdentityUser> UpdateAsync(IdentityUser model, string name)
+        public async Task<IdentityUser> UpdateAsync(IdentityUser model, string name, string role)
         {
             var result = await _userManager.UpdateAsync(model);
 
@@ -49,6 +53,8 @@ namespace IdentityServer.SSO.Business
 
             await SaveClaimAsync(model, JwtClaimTypes.Name, name);
             await SaveClaimAsync(model, JwtClaimTypes.Email, model.Email);
+
+            await _roleBusiness.UpdateAsync(model, role);
 
             return model;
         }

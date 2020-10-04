@@ -1,12 +1,11 @@
 ﻿@model BaseListViewModel<ClientViewModel>
 
 <div class="toolbar-row">
-    <button class="btn btn-info">
-        <a asp-action="Insert"
-           asp-controller="Client">
-            Nova aplicação +
-        </a>
-    </button>
+    <a class="btn btn-info"
+            asp-action="Insert"
+            asp-controller="Client">
+        Nova aplicação +
+    </a>
 </div>
 
 <div>
@@ -32,21 +31,19 @@
                 <td>@client.AccessTokenLifetime </td>
                 <td>
                     <div class="table-actions-buttons">
-                        <button class="btn btn-warning">
-                            <a asp-action="Update"
-                               asp-controller="Client"
-                               asp-route-id="@client.ClientId">
-                                Atualizar
-                            </a>
-                        </button>
+                        <a class="btn btn-warning"
+                            asp-action="Update"
+                            asp-controller="Client"
+                            asp-route-id="@client.ClientId">
+                            Atualizar
+                        </a>
 
-                        <button class="btn btn-danger">
-                            <a asp-action="Delete"
-                               asp-controller="Client"
-                               asp-route-id="@client.ClientId">
-                                Remover
-                            </a>
-                        </button>
+                        <a class="btn btn-danger"
+                            asp-action="Delete"
+                            asp-controller="Client"
+                            asp-route-id="@client.ClientId">
+                            Remover
+                        </a>
                     </div>
                 </td>
             </tr>

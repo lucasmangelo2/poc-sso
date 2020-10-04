@@ -7,9 +7,9 @@ namespace IdentityServer.SSO.Business.Interfaces
 {
     public interface IUserBusiness : IBusiness<IdentityUser>
     {
-        Task<IdentityUser> InsertAsync(string username, string name, string email, string password);
+        Task<IdentityUser> InsertAsync(string username, string name, string email, string password, string role);
 
-        Task<IdentityUser> UpdateAsync(IdentityUser model, string name);
+        Task<IdentityUser> UpdateAsync(IdentityUser model, string name, string role);
 
         Task DeleteAsync(string id);
 

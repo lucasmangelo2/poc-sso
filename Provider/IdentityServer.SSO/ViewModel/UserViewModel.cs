@@ -22,6 +22,9 @@ namespace IdentityServer.SSO.ViewModel
         [Required, Display(Name = "E-mail")]
         public string Email { get; set; }
 
+        [Required, Display(Name = "Perfil de usuário")]
+        public string Role { get; set; }
+
         public List<ClaimViewModel> Claims { get; set; } = new List<ClaimViewModel>();
     }
 }
