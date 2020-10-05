@@ -20,7 +20,8 @@
         </div>
 
         <div *ngIf="authenticationService.isAuthenticated">
-            <div class="link">
+            <div class="link" 
+                *ngIf="authenticationService.userRoles == 'Admin' || authenticationService.userRoles == 'Operator'">
                 <a routerLink="invoice-emission">
                     <mat-icon>
                         assignment

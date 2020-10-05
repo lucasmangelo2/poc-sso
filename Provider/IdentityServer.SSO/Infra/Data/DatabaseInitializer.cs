@@ -1,4 +1,5 @@
-﻿using IdentityServer.SSO.Data.Context;
+﻿using IdentityModel;
+using IdentityServer.SSO.Data.Context;
 using IdentityServer.SSO.Options;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
@@ -86,8 +87,11 @@ namespace IdentityServer.SSO.Infra.Data
             if (!context.Users.Any())
             {
                 var user = new IdentityUser("admin");
+                var defaultClaims = DefaultConfigurations.GetPrimaryClaims();
+                user.Email = defaultClaims.FirstOrDefault(x => x.Type == JwtClaimTypes.Email)?.Value;
+
                 userManger.CreateAsync(user).GetAwaiter().GetResult();
-                userManger.AddClaimsAsync(user, DefaultConfigurations.GetPrimaryClaims()).GetAwaiter().GetResult();
+                userManger.AddClaimsAsync(user, defaultClaims).GetAwaiter().GetResult();
                 userManger.AddPasswordAsync(user, "password").GetAwaiter().GetResult();
             }
         }

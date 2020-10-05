@@ -35,4 +35,11 @@ export class AuthenticationService {
   public get isAuthenticated(): boolean {
     return !!this.oauthService.getAccessToken();
   }
+
+  public get userRoles(): string {
+    var claims : any= this.oauthService.getIdentityClaims();
+    if (!claims) return null;
+
+    return claims.roles;
+  }
 }

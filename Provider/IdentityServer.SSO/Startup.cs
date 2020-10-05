@@ -81,6 +81,8 @@ namespace IdentityServer.SSO
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseCookiePolicy();
+
             app.UseStaticFiles();
 
             app.UseCors("api");

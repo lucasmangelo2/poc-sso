@@ -38,6 +38,7 @@ namespace IdentityServer.SSO.Business
 
             await SaveClaimAsync(user, JwtClaimTypes.Name, name);
             await SaveClaimAsync(user, JwtClaimTypes.Email, user.Email);
+            await SaveClaimAsync(user, "roles", role);
 
             await _roleBusiness.InsertAsync(user, role);
             await _userManager.AddPasswordAsync(user, password);
@@ -53,6 +54,7 @@ namespace IdentityServer.SSO.Business
 
             await SaveClaimAsync(model, JwtClaimTypes.Name, name);
             await SaveClaimAsync(model, JwtClaimTypes.Email, model.Email);
+            await SaveClaimAsync(model, "roles", role);
 
             await _roleBusiness.UpdateAsync(model, role);
 
