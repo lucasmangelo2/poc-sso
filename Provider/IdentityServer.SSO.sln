@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer.SSO.Data.Int
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Module", "Module", "{2C9434F3-4C8D-4C58-AD84-A730127064BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.SSO.Model", "IdentityServer.SSO.Model\IdentityServer.SSO.Model.csproj", "{7936819C-2BE9-46A8-9727-316A1C0A2344}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{E2D9163B-0174-4E5D-A0DA-DB7121AB3E7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2D9163B-0174-4E5D-A0DA-DB7121AB3E7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2D9163B-0174-4E5D-A0DA-DB7121AB3E7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7936819C-2BE9-46A8-9727-316A1C0A2344}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7936819C-2BE9-46A8-9727-316A1C0A2344}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7936819C-2BE9-46A8-9727-316A1C0A2344}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7936819C-2BE9-46A8-9727-316A1C0A2344}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{8DC5C0F3-6132-4358-962E-6318A51F5D4D} = {2C9434F3-4C8D-4C58-AD84-A730127064BB}
 		{9F3A416E-C471-4F79-9201-B9E0CEE24236} = {2C9434F3-4C8D-4C58-AD84-A730127064BB}
 		{E2D9163B-0174-4E5D-A0DA-DB7121AB3E7A} = {2C9434F3-4C8D-4C58-AD84-A730127064BB}
+		{7936819C-2BE9-46A8-9727-316A1C0A2344} = {2C9434F3-4C8D-4C58-AD84-A730127064BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {283E2D3C-D41D-43EB-84C1-34806D8C965D}

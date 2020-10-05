@@ -1,6 +1,6 @@
-﻿using IdentityServer.SSO.Data.Interfaces.Repository;
+﻿using IdentityServer.SSO.Data.Interfaces.Context;
+using IdentityServer.SSO.Data.Interfaces.Repository;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,7 +8,7 @@ namespace IdentityServer.SSO.Data.Repository
 {
     public class BaseRepository<TModel, TContext> : IRepository<TModel>
         where TModel : class
-        where TContext : DbContext
+        where TContext : IDbContext
     {
         public readonly TContext Context;
 
@@ -19,7 +19,15 @@ namespace IdentityServer.SSO.Data.Repository
 
         public Task DeleteAsync(TModel model)
         {
-            throw new NotImplementedException();
+            return Task.Run(() =>
+            {
+                if (model != null)
+                {
+                    Context.Set<TModel>().Remove(model);
+
+                    SaveChanges();
+                }
+            });
         }
 
         public Task<IQueryable<TModel>> GetAllAsync()
@@ -43,8 +51,6 @@ namespace IdentityServer.SSO.Data.Repository
         {
             return Task.Run(() =>
             {
-                DetachLocal(model);
-
                 Context.Set<TModel>().Update(model);
 
                 Context.Entry(model).State = EntityState.Modified;
@@ -53,14 +59,6 @@ namespace IdentityServer.SSO.Data.Repository
 
                 return model;
             });
-        }
-
-        private void DetachLocal(TModel model)
-        {
-            //TModel local = Context.Set<TModel>().Local.FirstOrDefault(x => x.Id.Equals(model.Id));
-
-            //if (local != null)
-            //    DetachEntity(local);
         }
 
         public void DetachEntity(TModel model)

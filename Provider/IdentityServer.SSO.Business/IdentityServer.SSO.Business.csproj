@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+
   <ItemGroup>
     <ProjectReference Include="..\IdentityServer.SSO.Business.Interfaces\IdentityServer.SSO.Business.Interfaces.csproj" />
     <ProjectReference Include="..\IdentityServer.SSO.Data.Interfaces\IdentityServer.SSO.Data.Interfaces.csproj" />

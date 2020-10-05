@@ -29,7 +29,6 @@ namespace IdentityServer.SSO.Infra.Middlewares
                 var userAgent = httpContext.Request.Headers["User-Agent"].ToString();
                 if (DisallowsSameSiteNone(userAgent))
                 {
-                    // For .NET Core < 3.1 set SameSite = (SameSiteMode)(-1)
                     options.SameSite = SameSiteMode.Unspecified;
                 }
             }
