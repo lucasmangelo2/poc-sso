@@ -21,13 +21,8 @@ namespace IdentityServer.SSO.Model
         public bool IsActive { get; set; } = true;
 
         /// <summary>
-        /// Subscribed webhook definitions unique names. <see cref="WebhookDefinition.Name"/>
+        /// Subscribed webhook definitions unique names. <see cref="Definition.Name"/>
         /// </summary>
-        public List<string> Webhooks { get; set; } = new List<string>();
-
-        /// <summary>
-        /// Gets a set of additional HTTP headers. That headers will be sent with the webhook.
-        /// </summary>
-        public IDictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
+        public List<WebhookSubscriptionRelation> WebhooksRelated { get; set; } = new List<WebhookSubscriptionRelation>();
     }
 }

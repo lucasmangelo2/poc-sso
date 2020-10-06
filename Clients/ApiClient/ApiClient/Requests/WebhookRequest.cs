@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace IdentityServer.SSO.Model
+namespace ApiClient.Requests
 {
-    public class WebhookPayload : BaseModel
+    public class WebhookRequest
     {
         public string Event { get; set; }
 
-        public dynamic Data { get; set; }
+        public object Data { get; set; }
 
         public DateTime CreationDate { get; set; }
     }

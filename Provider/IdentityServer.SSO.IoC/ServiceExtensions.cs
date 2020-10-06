@@ -30,6 +30,7 @@ namespace IdentityServer.SSO.IoC
 
             services.AddScoped<IClientRepository, ClientRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IWebhookDefinitionRepository, WebhookDefinitionRepository>();
             services.AddScoped<IWebhookSubscriptionRepository, WebhookSubscriptionRepository>();
             services.AddScoped<IWebhookEventRepository, WebhookEventRepository>();
             
@@ -38,7 +39,7 @@ namespace IdentityServer.SSO.IoC
             #region Context
 
             services.AddTransient<IIdentityConfigurationDbContext, IdentityConfigurationDbContext>();
-            services.AddTransient<IWebhookContext, WebhookContext>();
+            services.AddTransient<IWebhookDbContext, WebhookDbContext>();
 
             #endregion
 

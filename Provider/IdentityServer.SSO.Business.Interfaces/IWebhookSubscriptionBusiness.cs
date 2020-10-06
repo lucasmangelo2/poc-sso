@@ -6,6 +6,6 @@ namespace IdentityServer.SSO.Business.Interfaces
 {
     public interface IWebhookSubscriptionBusiness : IBusiness<WebhookSubscription>
     {
-        Task<List<WebhookSubscription>> GetByWebhookNameAsync(string webhookName);
+        Task<List<WebhookSubscription>> GetByWebhookIdAsync(long id);
     }
 }

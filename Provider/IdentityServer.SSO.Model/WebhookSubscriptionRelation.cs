@@ -2,10 +2,12 @@
 
 namespace IdentityServer.SSO.Model
 {
-    public class WebhookEvent : BaseModel
+    public class WebhookSubscriptionRelation : BaseModel
     {
-        public string Data { get; set; }
-
+        [Required]
         public long WebhookDefinitionId { get; set; }
+
+        [Required]
+        public long WebhookSubscriptionId { get; set; }
     }
 }

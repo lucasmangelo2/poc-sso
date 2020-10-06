@@ -17,7 +17,5 @@ namespace IdentityServer.SSO.Model
         public string Secret { get; set; }
 
         public string WebhookUri { get; set; }
-
-        public IDictionary<string, string> Headers { get; set; } = new Dictionary<string, string>();
     }
 }

@@ -6,6 +6,6 @@ namespace IdentityServer.SSO.Data.Interfaces.Repository
 {
     public interface IWebhookSubscriptionRepository : IRepository<WebhookSubscription>
     {
-        Task<List<WebhookSubscription>> GetByWebhookNameAsync(string webhookName);
+        Task<List<WebhookSubscription>> GetByWebhookNameAsync(long webhookId);
     }
 }

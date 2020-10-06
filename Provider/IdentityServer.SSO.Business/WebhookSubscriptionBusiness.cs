@@ -12,9 +12,9 @@ namespace IdentityServer.SSO.Business
         {
         }
 
-        public async Task<List<WebhookSubscription>> GetByWebhookNameAsync(string webhookName)
+        public async Task<List<WebhookSubscription>> GetByWebhookIdAsync(long id)
         {
-            return await _repository.GetByWebhookNameAsync(webhookName);
+            return await _repository.GetByWebhookNameAsync(id);
         }
     }
 }

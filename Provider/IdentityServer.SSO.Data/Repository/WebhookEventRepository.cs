@@ -7,9 +7,9 @@ using System.Text;
 
 namespace IdentityServer.SSO.Data.Repository
 {
-    public class WebhookEventRepository : BaseRepository<WebhookEvent, IWebhookContext>, IWebhookEventRepository
+    public class WebhookEventRepository : BaseRepository<WebhookEvent, IWebhookDbContext>, IWebhookEventRepository
     {
-        public WebhookEventRepository(IWebhookContext context) : base(context)
+        public WebhookEventRepository(IWebhookDbContext context) : base(context)
         {
         }
     }

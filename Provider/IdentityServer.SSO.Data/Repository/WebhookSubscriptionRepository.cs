@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace IdentityServer.SSO.Data.Repository
 {
-    public class WebhookSubscriptionRepository : BaseRepository<WebhookSubscription, IWebhookContext>, IWebhookSubscriptionRepository
+    public class WebhookSubscriptionRepository : BaseRepository<WebhookSubscription, IWebhookDbContext>, IWebhookSubscriptionRepository
     {
-        public WebhookSubscriptionRepository(IWebhookContext context) : base(context)
+        public WebhookSubscriptionRepository(IWebhookDbContext context) : base(context)
         {
         }
 
-        public async Task<List<WebhookSubscription>> GetByWebhookNameAsync(string webhookName)
+        public async Task<List<WebhookSubscription>> GetByWebhookNameAsync(long webhookId)
         {
-            return Context.Set<WebhookSubscription>().Where(x => x.Webhooks.Contains(webhookName)).AsNoTracking().ToList();
+            return Context.Set<WebhookSubscription>().Where(x => x.WebhooksRelated.Any(y => y.WebhookDefinitionId == webhookId)).AsNoTracking().ToList();
         }
     }
 }

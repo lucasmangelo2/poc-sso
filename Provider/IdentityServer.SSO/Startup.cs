@@ -29,6 +29,8 @@ namespace IdentityServer.SSO
 
             services.AddDbContext<ApplicationDbContext>(options => ConfigureNpgsqlDbContext(options, "SSOIdentityUser"));
 
+            services.AddDbContext<WebhookDbContext>(options => ConfigureNpgsqlDbContext(options, "SSOIdentityWebhook"));
+
             services.AddIdentity<IdentityUser, IdentityRole>(options => {
 
                 options.Password.RequiredLength = 5;

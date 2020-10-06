@@ -5,9 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ApiClient.Controllers
 {
     [Authorize]
-    [ApiController]
-    [Route("[controller]")]
-    public class InvoiceController : ControllerBase
+    public class InvoiceController : BaseController
     {
         [HttpGet]
         public async Task<IActionResult> GetAsync()

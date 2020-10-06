@@ -4,10 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IdentityServer.SSO.Data.Context
 {
-    public class WebhookContext : DbContext, IWebhookContext
+    public class WebhookDbContext : DbContext, IWebhookDbContext
     {
+        public WebhookDbContext(DbContextOptions<WebhookDbContext> options) : base(options)
+        {
+        }
+
         public DbSet<WebhookSubscription> WebhookSubscriptions { get; set; }
-        public DbSet<WebhookSenderArgs> WebhookSenderArgss { get; set; }
+
+        public DbSet<WebhookDefinition> WebhookDefinitions { get; set; }
+
         public DbSet<WebhookEvent> WebhookEvents { get; set; }
     }
 }

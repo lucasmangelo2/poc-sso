@@ -2,6 +2,7 @@
 using IdentityServer.SSO.Business.Interfaces;
 using IdentityServer.SSO.Business.Interfaces.Utils;
 using IdentityServer.SSO.Data.Interfaces.Repository;
+using IdentityServer.SSO.Model.Payload;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,17 @@ namespace IdentityServer.SSO.Business
     {
         private readonly IRoleBusiness _roleBusiness;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IWebhookPublisherBusiness _webhookPublisher;
 
         public UserBusiness(
             IRoleBusiness roleBusiness,
             IUserRepository repository,
-            UserManager<IdentityUser> userManager) : base(repository)
+            UserManager<IdentityUser> userManager,
+            IWebhookPublisherBusiness webhookPublisher) : base(repository)
         {
-            _roleBusiness = roleBusiness;
             _userManager = userManager;
+            _roleBusiness = roleBusiness;
+            _webhookPublisher = webhookPublisher;
         }
 
         public async Task<IdentityUser> InsertAsync(string username, string name, string email, string password, string role)
@@ -43,6 +47,14 @@ namespace IdentityServer.SSO.Business
             await _roleBusiness.InsertAsync(user, role);
             await _userManager.AddPasswordAsync(user, password);
 
+            await _webhookPublisher.PublishAsync("user.insert", new UserPayload()
+            {
+                UserName = username,
+                Name = name,
+                Email = email,
+                Role = role
+            });
+
             return user;
         }
 
@@ -57,6 +69,14 @@ namespace IdentityServer.SSO.Business
             await SaveClaimAsync(model, "roles", role);
 
             await _roleBusiness.UpdateAsync(model, role);
+
+            await _webhookPublisher.PublishAsync("user.update", new UserPayload()
+            {
+                UserName = model.UserName,
+                Name = name,
+                Email = model.Email,
+                Role = role
+            });
 
             return model;
         }

@@ -1,5 +1,6 @@
 ﻿using IdentityModel;
 using IdentityServer.SSO.Data.Context;
+using IdentityServer.SSO.Model;
 using IdentityServer.SSO.Options;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace IdentityServer.SSO.Infra.Data
@@ -23,6 +25,7 @@ namespace IdentityServer.SSO.Infra.Data
                 provider.MigrateDbContext<ApplicationDbContext>();
                 provider.MigrateDbContext<PersistedGrantDbContext>();
                 provider.MigrateDbContext<ConfigurationDbContext>();
+                provider.MigrateDbContext<WebhookDbContext>();
 
                 provider.PersistDefaultClients();
                 provider.PersistDefaultIdentityResources();
@@ -30,6 +33,8 @@ namespace IdentityServer.SSO.Infra.Data
                 provider.PersistDefaultIdentityUser();
                 provider.PersistDefaultRoles();
                 provider.PersistDefaultUserRolesRelation();
+                provider.PersistDefaultWebhooks();
+                provider.PersistDefaultWebhookSubscriptions();
             }
 
             return app;
@@ -125,6 +130,61 @@ namespace IdentityServer.SSO.Infra.Data
                 {
                     userManger.AddToRoleAsync(user, "Admin").GetAwaiter().GetResult();
                 }
+            }
+        }
+
+        private static void PersistDefaultWebhooks(this IServiceProvider provider)
+        {
+            var context = provider.GetRequiredService<WebhookDbContext>();
+
+            if (!context.WebhookDefinitions.Any())
+            {
+                context.WebhookDefinitions.Add(new WebhookDefinition()
+                {
+                    Id = 1,
+                    Name = "user.insert"
+                });
+
+                context.WebhookDefinitions.Add(new WebhookDefinition()
+                {
+                    Id = 2,
+                    Name = "user.update"
+                });
+
+                context.SaveChanges();
+            }
+        }
+
+        private static void PersistDefaultWebhookSubscriptions(this IServiceProvider provider)
+        {
+            var context = provider.GetRequiredService<WebhookDbContext>();
+
+            if (!context.WebhookSubscriptions.Any())
+            {
+                context.WebhookSubscriptions.Add(new WebhookSubscription()
+                {
+                    Id = 1,
+                    WebhookUri = "http://localhost:5002/user",
+                    IsActive = true,
+                    Secret = "37308e5f-49cd-48b2-a7aa-aebe5b02ed9b",
+                    WebhooksRelated = new List<WebhookSubscriptionRelation>()
+                    {
+                        new WebhookSubscriptionRelation()
+                        {
+                            Id = 1,
+                            WebhookDefinitionId = 1,
+                            WebhookSubscriptionId = 1
+                        },
+                        new WebhookSubscriptionRelation()
+                        {
+                            Id = 2,
+                            WebhookDefinitionId = 2,
+                            WebhookSubscriptionId = 1
+                        }
+                    }
+                });
+
+                context.SaveChanges();
             }
         }
 

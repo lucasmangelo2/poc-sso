@@ -39,9 +39,9 @@ namespace IdentityServer.SSO.Business
 
             var payload = new WebhookPayload()
             {
-                Event = webhookSenderArgs.WebhookEventId.ToString(),
+                Event = webhookSenderArgs.WebhookName,
                 Data = data,
-                CreationTimeUtc = DateTime.Now
+                CreationDate = DateTime.Now
             };
 
             return JsonConvert.SerializeObject(payload);
@@ -56,9 +56,9 @@ namespace IdentityServer.SSO.Business
 
                 var signatureBytes = hasher.ComputeHash(data);
 
-                var headerValue = string.Format(CultureInfo.InvariantCulture, "secret", BitConverter.ToString(signatureBytes));
+                var headerValue = string.Format(CultureInfo.InvariantCulture, "sha256={0}", BitConverter.ToString(signatureBytes));
 
-                request.Headers.Add("secret", headerValue);
+                request.Headers.Add("sso-webhook-secret", headerValue);
             }
         }
 

@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ApiClient.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ApiClient
@@ -32,7 +28,6 @@ namespace ApiClient
                 {
                     options.Authority = "http://localhost:5000";
                     options.RequireHttpsMetadata = false;
-                    //options.ApiName = "api_invoice";
 
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
@@ -48,6 +43,14 @@ namespace ApiClient
                     policy.RequireClaim("scope", "api_invoice");
                 });
             });
+
+            services.AddDbContext<MainDbContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("ApiConnection"), c => c.MigrationsAssembly(this.GetType().Assembly.GetName().Name))
+            );
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<MainDbContext>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

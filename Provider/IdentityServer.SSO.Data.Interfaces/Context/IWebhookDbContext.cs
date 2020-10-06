@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IdentityServer.SSO.Data.Interfaces.Context
 {
-    public interface IWebhookContext : IDbContext
+    public interface IWebhookDbContext : IDbContext
     {
         DbSet<WebhookSubscription> WebhookSubscriptions { get; set; }
-        DbSet<WebhookSenderArgs> WebhookSenderArgss { get; set; }
+
+        DbSet<WebhookDefinition> WebhookDefinitions { get; set; }
+        
         DbSet<WebhookEvent> WebhookEvents { get; set; }
     }
 }
