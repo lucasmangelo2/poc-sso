@@ -121,7 +121,7 @@ namespace IdentityServer.SSO.Controllers
                 return View(model);
             }
 
-            var client = await _clientStore.FindClientByIdAsync(model.ClientId);
+            var client = await _clientStore.FindClientByIdAsync(id);
 
             if (client != null)
             {
